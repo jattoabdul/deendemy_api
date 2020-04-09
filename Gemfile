@@ -3,38 +3,145 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+# CORE
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
-# Use Puma as the app server
-gem 'puma', '~> 4.1'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.7'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'puma', '~> 4.1' # Use Puma as the app server - 4.3
 
+# RUBY HACKING
+gem 'concurrent-ruby', '~> 1.1'
+# gem 'virtus', '~> 1.0'
+gem 'tzinfo-data' # gem 'tzinfo-data', '~> 1.2019'
+gem 'active_hash', '~> 2.3'
+
+# DATA
 gem 'mongoid', '~> 7.0.5'
 gem 'bson_ext'
-
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+# gem 'zero_downtime_migrations', '~> 0.0'
+# gem 'countries', '~> 3.0'
+# gem 'paranoia', '~> 2.4'
+# gem 'ice_nine', '~> 0.11'
+# gem 'textacular', '~> 5.0'
+# gem 'simple_encryptable', '~> 0.1'
+group :production, :staging do
+  # gem 'active_record_slave', '1.6.0'
 end
 
+# USER
+# gem 'devise', '~> 4.7'
+# gem 'bcrypt', '~> 3.1.7'
+# gem 'phony_rails', '~> 0.14'
+# gem 'StreetAddress', require: 'street_address'
+
+# JSON, API SEC
+# gem 'oj', '~> 3.9'
+# gem 'jbuilder', '~> 2.9'
+# gem 'jsonapi-rails', '~> 0.4'
+# gem 'jwt', '~> 2.2'
+# gem 'nokogiri', '~> 1.10'
+
+# STATEMACHINE
+# gem 'statesman', '~> 4.1'
+
+# API REQUESTS
+# gem 'http', '~> 4.1'
+# gem 'rest-client', '~> 2.0'
+
+# EXTERNAL SERVICES
+# gem 'mandrill-api', '~> 1.0'
+# gem 'stripe', '~> 3.3'
+# gem 'twilio-ruby', '~> 5.6.4'
+# gem 'aws-sdk-s3', '~> 1.0'
+# gem 'taxjar-ruby', '~> 2.6', require: 'taxjar'
+# gem 'slack-ruby-client', '~> 0.14'
+# gem 'gibbon', '~> 3.2'
+# gem 'shortener', '~> 0.8'
+# gem 'mixpanel-ruby', '~> 2.2'
+# gem 'searchkick', '~> 4.1' # Elastic search
+# gem 'searchjoy', '~> 0.4' # Elastic search
+# gem 'newrelic_rpm'
+
+# PRODUCTION/STAGING
+group :production, :staging do
+  # gem 'lograge', '~> 0.11'
+end
+
+# JOB SERVER
+# gem 'redis', '~> 4.1'
+# gem 'hiredis', '~> 0.6'
+# gem 'redis-rails', '~> 5.0'
+# gem 'sidekiq', '~> 5.2'
+# gem 'sidekiq-scheduler', '~> 3.0'
+
+# MIDDLEWARE
+gem 'rack-heartbeat', '~> 1.1'  # simple uptime checker
+gem 'rack-timeout', '~> 0.5'    # abort requests that are taking too long
+gem 'rack-attack', '~> 6.1'     # handles blocking & throttling
+gem 'rack-cors', '~> 1.0'       # handles Cross-Origin Resource Sharing
+
+# REPORTING & MONITORING
+# gem 'sentry-raven', '~> 2.11'
+# gem 'awesome_print', '2.0.0.pre2'
+# gem 'puma_worker_killer', '~> 0.1.1'
+
+# FILE HANDING
+# gem 'rubyzip', '~> 2.0'
+# gem 'combine_pdf', '~> 1.0', '>= 1.0.16'
+
+# DEVELOPMENT
 group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller', platforms: [:mri]
+  # gem 'brakeman'
+  # gem 'bundler-audit'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # gem 'spring-commands-rspec'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data'
+# TESTING
+group :test, :development do
+  # agem 'dotenv-rails', '~> 2.7'
+  # gem 'bullet'
+  # agem 'rspec-rails'
+  # agem 'rubocop', '~> 0.58', require: false
+  # gem 'reek'
+  # gem 'lol_dba'
+end
+
+group :test do
+  # agem 'shoulda-matchers'
+  # gem 'mailcatcher'
+  # agem 'rails-controller-testing'
+  # agem 'database_cleaner'
+  # agem 'fuubar', '~> 2.5'
+  # gem 'rspec-sidekiq'
+  # agem 'terminal-table'
+  # agem 'timecop'
+  # gem 'vcr'
+  # gem 'stripe-ruby-mock', require: false
+  # gem 'webmock'
+  # gem 'mock_redis'
+  # agem 'simplecov', '~> 0.17.0', require: false
+end
+
+# DEBUG/PRY
+group :test, :development do
+  gem 'byebug' # -
+  gem 'pry'
+  gem 'pry-byebug'
+  # gem 'pry-coolline'
+  # gem 'pry-doc', '>= 1.0.0'
+  # gem 'pry-rails'
+  # gem 'pry-remote'
+  # gem 'pry-rescue'
+  # gem 'pry-stack_explorer'
+end
+
+# GUARD / AUTO TEST
+group :test, :development do
+  # agem 'factory_bot_rails', require: false
+  # agem 'faker', require: false
+end
 
