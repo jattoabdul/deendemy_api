@@ -34,7 +34,6 @@ gem 'ice_nine', '~> 0.11'
 # gem 'nokogiri', '~> 1.10'
 
 # STATEMACHINE
-# gem 'statesman', '~> 4.1'
 gem 'state_machines-mongoid'
 
 # API REQUESTS
@@ -57,7 +56,7 @@ gem 'state_machines-mongoid'
 
 # PRODUCTION/STAGING
 group :production, :staging do
-  # gem 'lograge', '~> 0.11'
+  gem 'lograge', '~> 0.11'
 end
 
 # JOB SERVER
@@ -74,9 +73,8 @@ gem 'rack-attack', '~> 6.1'     # handles blocking & throttling
 gem 'rack-cors', '~> 1.0'       # handles Cross-Origin Resource Sharing
 
 # REPORTING & MONITORING
-# gem 'sentry-raven', '~> 2.11'
-# gem 'awesome_print', '2.0.0.pre2'
-# gem 'puma_worker_killer', '~> 0.1.1'
+gem 'sentry-raven', '~> 2.11'
+gem 'puma_worker_killer', '~> 0.1.1'
 
 # FILE HANDING
 gem 'rubyzip', '~> 2.0'
