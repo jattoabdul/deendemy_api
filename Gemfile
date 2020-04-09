@@ -78,8 +78,8 @@ gem 'rack-cors', '~> 1.0'       # handles Cross-Origin Resource Sharing
 # gem 'puma_worker_killer', '~> 0.1.1'
 
 # FILE HANDING
-# gem 'rubyzip', '~> 2.0'
-# gem 'combine_pdf', '~> 1.0', '>= 1.0.16'
+gem 'rubyzip', '~> 2.0'
+gem 'combine_pdf', '~> 1.0', '>= 1.0.16'
 
 # DEVELOPMENT
 group :development do
