@@ -10,22 +10,15 @@ gem 'puma', '~> 4.1' # Use Puma as the app server - 4.3
 
 # RUBY HACKING
 gem 'concurrent-ruby', '~> 1.1'
-# gem 'virtus', '~> 1.0'
+gem 'virtus', '~> 1.0'
 gem 'tzinfo-data' # gem 'tzinfo-data', '~> 1.2019'
 gem 'active_hash', '~> 2.3'
 
 # DATA
 gem 'mongoid', '~> 7.0.5'
 gem 'bson_ext'
-# gem 'zero_downtime_migrations', '~> 0.0'
-# gem 'countries', '~> 3.0'
-# gem 'paranoia', '~> 2.4'
-# gem 'ice_nine', '~> 0.11'
-# gem 'textacular', '~> 5.0'
-# gem 'simple_encryptable', '~> 0.1'
-group :production, :staging do
-  # gem 'active_record_slave', '1.6.0'
-end
+gem 'countries', '~> 3.0'
+gem 'ice_nine', '~> 0.11'
 
 # USER
 # gem 'devise', '~> 4.7'
