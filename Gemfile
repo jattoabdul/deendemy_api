@@ -62,8 +62,8 @@ end
 gem 'redis', '~> 4.1'
 gem 'hiredis', '~> 0.6'
 gem 'redis-rails', '~> 5.0'
-# gem 'sidekiq', '~> 5.2'
-# gem 'sidekiq-scheduler', '~> 3.0'
+gem 'sidekiq', '~> 5.2'
+gem 'sidekiq-scheduler', '~> 3.0'
 
 # MIDDLEWARE
 gem 'rack-heartbeat', '~> 1.1'
@@ -105,7 +105,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'database_cleaner'
   gem 'fuubar', '~> 2.5'
-  # gem 'rspec-sidekiq'
+  gem 'rspec-sidekiq'
   gem 'terminal-table'
   gem 'timecop'
   # gem 'vcr'

@@ -24,6 +24,8 @@ module DeendemyApi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    config.active_job.queue_adapter = :sidekiq
+
     config.middleware.use Rack::Attack
 
     # Cors Setup
