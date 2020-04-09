@@ -14,21 +14,32 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
-    config.cache_store = :memory_store
-    config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
-    }
-  else
-    config.action_controller.perform_caching = false
+  # if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  config.action_controller.perform_caching = true
+  config.cache_store = :redis_store, ENV['REDIS_URL']
+  config.public_file_server.headers = {
+    'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
+  }
+  # else
+  #   config.action_controller.perform_caching = false
+  #   config.cache_store = :null_store
+  # end
 
-    config.cache_store = :null_store
-  end
+  config.action_controller.default_url_options = { host: ENV.fetch('APPLICATION_HOST') }
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
+
+  # Send emails to test server
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: '127.0.0.1',
+    port: 1025,
+    openssl_verify_mode: 'none'
+  }
+  config.action_mailer.perform_deliveries = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -47,14 +58,6 @@ Rails.application.configure do
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 
-  # Send emails to test server
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: '127.0.0.1',
-    port: 1025,
-    openssl_verify_mode: 'none'
-  }
-
   # Incase of slow loading due to mongo eagerloading all models
   # config.mongoid.preload_models = false
 
@@ -62,3 +65,5 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end
+
+Rails.application.routes.default_url_options[:host] = ENV.fetch('APPLICATION_HOST')

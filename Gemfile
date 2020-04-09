@@ -59,9 +59,9 @@ group :production, :staging do
 end
 
 # JOB SERVER
-# gem 'redis', '~> 4.1'
-# gem 'hiredis', '~> 0.6'
-# gem 'redis-rails', '~> 5.0'
+gem 'redis', '~> 4.1'
+gem 'hiredis', '~> 0.6'
+gem 'redis-rails', '~> 5.0'
 # gem 'sidekiq', '~> 5.2'
 # gem 'sidekiq-scheduler', '~> 3.0'
 
@@ -111,7 +111,7 @@ group :test do
   # gem 'vcr'
   # gem 'stripe-ruby-mock', require: false
   gem 'webmock'
-  # gem 'mock_redis'
+  gem 'mock_redis'
   gem 'simplecov', '~> 0.17.0', require: false
 end
 

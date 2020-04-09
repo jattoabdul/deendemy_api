@@ -1,10 +1,16 @@
+default: &default
+  adapter: redis
+  channel_prefix: deendemy
+  url: <%= ENV.fetch('REDIS_URL') { 'redis://localhost:6379/1' } %>
+
 development:
-  adapter: async
+  <<: *default
 
 test:
-  adapter: test
+  <<: *default
+
+staging:
+  <<: *default
 
 production:
-  adapter: redis
-  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: deendemy_api_production
+  <<: *default

@@ -133,6 +133,7 @@ GEM
       temple (>= 0.8.0)
       tilt
     hashdiff (1.0.1)
+    hiredis (0.6.3)
     http (4.4.1)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -196,6 +197,7 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
+    mock_redis (0.22.0)
     mongo (2.11.4)
       bson (>= 4.4.2, < 5.0.0)
     mongoid (7.0.6)
@@ -284,6 +286,23 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.1.3)
+    redis-actionpack (5.2.0)
+      actionpack (>= 5, < 7)
+      redis-rack (>= 2.1.0, < 3)
+      redis-store (>= 1.1.0, < 2)
+    redis-activesupport (5.2.0)
+      activesupport (>= 3, < 7)
+      redis-store (>= 1.3, < 2)
+    redis-rack (2.1.2)
+      rack (>= 2.0.8, < 3)
+      redis-store (>= 1.2, < 2)
+    redis-rails (5.0.2)
+      redis-actionpack (>= 5.0, < 6)
+      redis-activesupport (>= 5.0, < 6)
+      redis-store (>= 1.2, < 2)
+    redis-store (1.8.2)
+      redis (>= 4, < 5)
     request_store (1.5.0)
       rack (>= 1.4)
     rest-client (2.1.0)
@@ -412,6 +431,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   fuubar (~> 2.5)
+  hiredis (~> 0.6)
   http (~> 4.1)
   ice_nine (~> 0.11)
   jsonapi-rails (~> 0.4)
@@ -419,6 +439,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   lograge (~> 0.11)
   mailcatcher
+  mock_redis
   mongoid (~> 7.0.5)
   mongoid-rspec
   oj (~> 3.9)
@@ -435,6 +456,8 @@ DEPENDENCIES
   rack-timeout (~> 0.5)
   rails (~> 6.0.2, >= 6.0.2.2)
   rails-controller-testing
+  redis (~> 4.1)
+  redis-rails (~> 5.0)
   rest-client (~> 2.0)
   rspec-rails
   rubyzip (~> 2.0)
