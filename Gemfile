@@ -37,8 +37,8 @@ gem 'ice_nine', '~> 0.11'
 gem 'state_machines-mongoid'
 
 # API REQUESTS
-# gem 'http', '~> 4.1'
-# gem 'rest-client', '~> 2.0'
+gem 'http', '~> 4.1'
+gem 'rest-client', '~> 2.0'
 
 # EXTERNAL SERVICES
 # gem 'mandrill-api', '~> 1.0'
