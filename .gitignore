@@ -7,13 +7,41 @@
 # Ignore bundler config.
 /.bundle
 
+# Intellij Idea
+.idea/
+
+# Vscode IDE
+.vscode
+dump.rdb
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
 
+/node_modules
+/yarn-error.log
+
 .byebug_history
+
+/node_modules/*
+
+.env
+.env.*
+/doc
+/public/packs
+/public/packs-test
+/node_modules
+*.*.sw*
+/spec/examples.txt
+/coverage
+*.*.swo
+*.sql
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
@@ -22,3 +50,9 @@
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+.env
+
+# For mac users
+.DS_Store
+
+latest.dump
