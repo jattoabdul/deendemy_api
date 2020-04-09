@@ -35,6 +35,7 @@ gem 'ice_nine', '~> 0.11'
 
 # STATEMACHINE
 # gem 'statesman', '~> 4.1'
+gem 'state_machines-mongoid'
 
 # API REQUESTS
 # gem 'http', '~> 4.1'
@@ -85,8 +86,7 @@ gem 'combine_pdf', '~> 1.0', '>= 1.0.16'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', platforms: [:mri]
-  # gem 'brakeman'
-  # gem 'bundler-audit'
+  gem 'brakeman'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -95,12 +95,10 @@ end
 
 # TESTING
 group :test, :development do
-  # agem 'dotenv-rails', '~> 2.7'
-  # gem 'bullet'
-  # agem 'rspec-rails'
-  # agem 'rubocop', '~> 0.58', require: false
-  # gem 'reek'
-  # gem 'lol_dba'
+  gem 'dotenv-rails', '~> 2.7'
+  gem 'bullet'
+  # gem 'rspec-rails'
+  # gem 'rubocop', '~> 0.58', require: false
 end
 
 group :test do
@@ -124,12 +122,9 @@ group :test, :development do
   gem 'byebug' # -
   gem 'pry'
   gem 'pry-byebug'
-  # gem 'pry-coolline'
-  # gem 'pry-doc', '>= 1.0.0'
-  # gem 'pry-rails'
-  # gem 'pry-remote'
-  # gem 'pry-rescue'
-  # gem 'pry-stack_explorer'
+  gem 'pry-rails'
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
 end
 
 # GUARD / AUTO TEST
