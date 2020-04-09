@@ -1,0 +1,49 @@
+<% DISABLED_DEV = !['development', nil].include?(ENV.fetch('RAILS_ENV', nil)) %>
+
+---
+:timeout: 8
+
+development:
+  :concurrency: 5
+staging:
+  :concurrency: <%= ENV.fetch('RAILS_MAX_THREADS', 5) %>
+production:
+  :concurrency: <%= ENV.fetch('RAILS_MAX_THREADS', 5) %>
+
+:queues:
+  - ['mailers', 5]
+  - ['important', 4]
+  - ['events', 3]
+  - ['default', 2]
+  - ['analytics', 1]
+  - ['searchkick', 1]
+
+:enabled: true
+
+:scheduler:
+  :listened_queues_only: true
+
+:schedule:
+
+  # --- SAMPLE WORKER JOB GROUP ---
+  # job_name:
+  #   description: 'Job Description'
+  #   cron: '0 * * * *' # Runs every hour starting at *:00
+  #   class: 'Tasks::SampleWorkerJob'
+  #   queue: 'default'
+
+  # --- EMAIL REPORTS --
+  # sample_report:
+  #   description: 'Monthly sample email report'
+  #   cron: '0 9 1 * * America/New_York' # Runs monthly, on 1st, 9:00AM ET
+  #   class: 'Tasks::SampleMailerJob'
+  #   queue: mailers
+  #   args: ['monthly_samples']
+
+  # --- SEARCHKICK INDEX JOB --
+  # sample_model_batch_reindex:
+  #   description: 'Sample Model SearchKick Reindexing'
+  #   cron: '23 * * * *' # Runs hourly on an off minute 23
+  #   class: 'Tasks::SearchKickBatchIndexJob'
+  #   queue: searchkick
+  #   args: ['Model']
