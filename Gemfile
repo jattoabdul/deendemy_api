@@ -66,10 +66,10 @@ end
 # gem 'sidekiq-scheduler', '~> 3.0'
 
 # MIDDLEWARE
-gem 'rack-heartbeat', '~> 1.1'  # simple uptime checker
-gem 'rack-timeout', '~> 0.5'    # abort requests that are taking too long
-gem 'rack-attack', '~> 6.1'     # handles blocking & throttling
-gem 'rack-cors', '~> 1.0'       # handles Cross-Origin Resource Sharing
+gem 'rack-heartbeat', '~> 1.1'
+gem 'rack-timeout', '~> 0.5'
+gem 'rack-attack', '~> 6.1'
+gem 'rack-cors', '~> 1.0'
 
 # REPORTING & MONITORING
 gem 'sentry-raven', '~> 2.11'
@@ -94,24 +94,25 @@ end
 group :test, :development do
   gem 'dotenv-rails', '~> 2.7'
   gem 'bullet'
-  # gem 'rspec-rails'
+  gem 'rspec-rails'
   # gem 'rubocop', '~> 0.58', require: false
 end
 
 group :test do
-  # agem 'shoulda-matchers'
-  # gem 'mailcatcher'
-  # agem 'rails-controller-testing'
-  # agem 'database_cleaner'
-  # agem 'fuubar', '~> 2.5'
+  gem 'mongoid-rspec'
+  gem 'shoulda-matchers'
+  gem 'mailcatcher'
+  gem 'rails-controller-testing'
+  gem 'database_cleaner'
+  gem 'fuubar', '~> 2.5'
   # gem 'rspec-sidekiq'
-  # agem 'terminal-table'
-  # agem 'timecop'
+  gem 'terminal-table'
+  gem 'timecop'
   # gem 'vcr'
   # gem 'stripe-ruby-mock', require: false
-  # gem 'webmock'
+  gem 'webmock'
   # gem 'mock_redis'
-  # agem 'simplecov', '~> 0.17.0', require: false
+  gem 'simplecov', '~> 0.17.0', require: false
 end
 
 # DEBUG/PRY
@@ -126,7 +127,7 @@ end
 
 # GUARD / AUTO TEST
 group :test, :development do
-  # agem 'factory_bot_rails', require: false
-  # agem 'faker', require: false
+  gem 'factory_bot_rails', require: false
+  gem 'faker', require: false
 end
 

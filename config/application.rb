@@ -13,7 +13,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
 # require "sprockets/railtie"
-# require "rails/test_unit/railtie"
+require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -26,11 +26,12 @@ module DeendemyApi
 
     config.middleware.use Rack::Attack
 
+    # Cors Setup
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
 
-        # resource '/assets/*', headers: :any, methods: [:get]
+        # resource '/assets/*', headers: :any, methods: [:options, :head]
         resource '*', headers: :any, methods: [:get, :post, :put, :patch]
       end
     end
