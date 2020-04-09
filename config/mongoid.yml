@@ -1,0 +1,24 @@
+development:
+  clients:
+    default:
+      database: deendemy_api_development
+      hosts:
+        - localhost:27017
+      options:
+        server_selection_timeout: 5
+        ssl: true
+  options:
+    app_name: DeenDemyAPI
+
+test:
+  clients:
+    default:
+      database: deendemy_api_test
+      hosts:
+        - localhost:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
+  # options:
+    # app_name: DeenDemyAPI
