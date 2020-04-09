@@ -27,11 +27,10 @@ gem 'ice_nine', '~> 0.11'
 # gem 'StreetAddress', require: 'street_address'
 
 # JSON, API SEC
-# gem 'oj', '~> 3.9'
+gem 'oj', '~> 3.9'
 # gem 'jbuilder', '~> 2.9'
-# gem 'jsonapi-rails', '~> 0.4'
-# gem 'jwt', '~> 2.2'
-# gem 'nokogiri', '~> 1.10'
+gem 'jsonapi-rails', '~> 0.4'
+gem 'jwt', '~> 2.2'
 
 # STATEMACHINE
 gem 'state_machines-mongoid'
