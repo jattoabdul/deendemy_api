@@ -95,7 +95,7 @@ group :test, :development do
   gem 'dotenv-rails', '~> 2.7'
   gem 'bullet'
   gem 'rspec-rails'
-  # gem 'rubocop', '~> 0.58', require: false
+  gem 'rubocop', '~> 0.58', require: false
 end
 
 group :test do

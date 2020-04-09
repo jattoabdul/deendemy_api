@@ -1,0 +1,125 @@
+AllCops:
+  Exclude:
+    - "vendor/**/*"
+    - "db/**/*"
+    - "tmp/**/*"
+    - "bin/**/*"
+    - "log/**/*"
+    - "config/**/*"
+    - "app/assets/**/*"
+    - "app/lib/deendemy/**/*"
+    - "Rakefile"
+    - "spec/cassettes/**/*"
+    - "spec/support/**/*"
+    - "spec/rails_helper.rb"
+    - "micro-shared/**/*"
+    - "Gemfile"
+    - "Gemfile.lock"
+    - "node_modules/**/*"
+  UseCache: false
+  TargetRubyVersion: 2.6
+
+#################### Lint ###########################
+Lint/AssignmentInCondition:
+  Enabled: false
+Lint/SuppressedException:
+  Enabled: false
+Lint/UnusedBlockArgument:
+  Enabled: false
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+#################### Metric ###########################
+Metrics/AbcSize:
+  Enabled: false
+  Max: 20
+Metrics/ClassLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Layout:
+  Enabled: false
+  Max: 120
+Metrics/ModuleLength:
+  Enabled: false
+  Max: 200
+Metrics/BlockLength:
+  CountComments: false
+  Exclude:
+    - "spec/**/*"
+    - "link_community.gemspec"
+  Max: 150
+#################### Style ###########################
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  Enabled: true
+  PreferredDelimiters:
+    "%": "()"
+    "%i": "()"
+    "%q": "()"
+    "%Q": "()"
+    "%r": "{}"
+    "%s": "()"
+    "%w": "()"
+    "%W": "()"
+    "%x": "()"
+Style/WordArray:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: true
+  Exclude:
+    - .pryrc
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+#################### Layout ###########################
+Layout/ParameterAlignment:
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+Layout/ArgumentAlignment:
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+Layout/TrailingEmptyLines:
+  AutoCorrect: true
+Layout/DotPosition:
+  Enabled: true
+  EnforcedStyle: trailing
+  SupportedStyles:
+  - leading
+  - trailing
+Layout/FirstHashElementIndentation:
+  Enabled: true
+  EnforcedStyle: consistent
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented
+Layout/MultilineAssignmentLayout:
+  Enabled: true
+  EnforcedStyle: same_line
+Layout/EndAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: start_of_line
+Layout/CaseIndentation:
+  Enabled: true
+  EnforcedStyle: end
+Layout/RescueEnsureAlignment:
+  Enabled: false
+
+#################### Naming ###########################
+Naming/PredicateName:
+  Enabled: true
+  NamePrefix:
+  - is_
+  - has_
+  - have_
+  ForbiddenPrefixes:
+  - is_
