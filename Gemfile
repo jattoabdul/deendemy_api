@@ -6,7 +6,7 @@ ruby '2.6.5'
 # CORE
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'puma', '~> 4.1' # Use Puma as the app server - 4.3
+gem 'puma', '~> 4.3' # Use Puma as the app server - 4.1
 
 # RUBY HACKING
 gem 'concurrent-ruby', '~> 1.1'

@@ -24,13 +24,12 @@ production:
   :listened_queues_only: true
 
 :schedule:
-
-  # --- SAMPLE WORKER JOB GROUP ---
-  # job_name:
-  #   description: 'Job Description'
-  #   cron: '0 * * * *' # Runs every hour starting at *:00
-  #   class: 'Tasks::SampleWorkerJob'
-  #   queue: 'default'
+  # --- SAMPLE WORKER JOB ---
+  job_name:
+    description: 'Job Description'
+    cron: '0 * * * *' # Runs every hour starting at *:00
+    class: 'Tasks::SampleWorkerJob'
+    queue: 'default'
 
   # --- EMAIL REPORTS --
   # sample_report:

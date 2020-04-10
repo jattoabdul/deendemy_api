@@ -489,7 +489,7 @@ DEPENDENCIES
   pry-rails
   pry-rescue
   pry-stack_explorer
-  puma (~> 4.1)
+  puma (~> 4.3)
   puma_worker_killer (~> 0.1.1)
   rack-attack (~> 6.1)
   rack-cors (~> 1.0)
