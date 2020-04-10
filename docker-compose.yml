@@ -1,0 +1,108 @@
+version: '3'
+services:
+
+  ruby:
+    image: ruby:2.6.5-alpine3.11
+    networks:
+      - deendemy_main
+
+  deendemy_db:
+    container_name: deendemy_db
+    image: mongo:4.0-xenial
+    restart: always
+    ports:
+      - 27053:27017
+    networks:
+      - deendemy_main
+    environment:
+      - MONGO_INITDB_DATABASE=deendemy
+      - MONGO_INITDB_ROOT_USERNAME=test
+      - MONGO_INITDB_ROOT_PASSWORD=test
+  
+  deendemy_redis:
+    container_name: deendemy_redis
+    image: redis:4-alpine
+    restart: always
+    ports:
+      - 6379
+    networks:
+      - deendemy_main
+  
+  deendemy_mailcatcher:
+    container_name: deendemy_mailcatcher
+    image: zolweb/docker-mailcatcher:latest
+    ports:
+    - 1025:1025
+    - 1080:1080
+    networks:
+      - deendemy_main
+
+  deendemy_api:
+    container_name: deendemy_api
+    restart: always
+    build:
+      context: .
+      args:
+        - APP_ENV=local
+    volumes:
+      - .:/deendemy
+    networks:
+      - deendemy_main
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+      - 1025
+      - 1080
+    depends_on:
+      - ruby
+      - deendemy_db
+      - deendemy_redis
+      - deendemy_mailcatcher
+    environment:
+      - RAILS_ENV=development
+      - MONGO_DSN=mongodb://test:test@deendemy_db
+      - SENTRY_DSN=development_sentry_dsn
+      - DATABASE_NAME=deendemy
+      - REDIS_URL=redis://deendemy_redis:6379/12
+      - SECRET_KEY_BASE=4d1d49d3e373fedf445ada72f1db345c
+      - RAILS_MASTER_KEY=4d1d49d3e373fedf445ada72f1db345c
+      - APPLICATION_HOST=http://localhost:3000
+    # command: "foreman start -f Procfile.dev"
+    command: "foreman start -f Procfile.dev -c web"
+
+  deendemy_worker:
+    container_name: deendemy_worker
+    restart: always
+    build:
+      context: .
+    volumes:
+      - .:/deendemy
+    networks:
+      - deendemy_main
+    expose:
+      - 3000
+      - 1025
+      - 1080
+    depends_on:
+      - ruby
+      - deendemy_db
+      - deendemy_redis
+      - deendemy_mailcatcher
+    environment:
+      - RAILS_ENV=development
+      - MONGO_DSN=mongodb://test:test@deendemy_db
+      - SENTRY_DSN=development_sentry_dsn
+      - DATABASE_NAME=deendemy
+      - REDIS_URL=redis://deendemy_redis:6379/12
+      - SECRET_KEY_BASE=development_secret_key
+      - APPLICATION_HOST=http://localhost:3000
+    command: "foreman start -f Procfile.dev -c worker"
+
+  # Elastic Search
+  # deendemy_els:
+  #   container_name: deendemy_els
+
+networks:
+  deendemy_main:
+    driver: bridge

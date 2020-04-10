@@ -1,24 +1,12 @@
-# README
+# DeenDemy
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> A simple app.
 
-Things you may want to cover:
+## Method 1: Docker Build and Run Setup
 
-* Ruby version
+To Install all system requirements and run app:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Install Docker
+- ```$docker-compose up --build```
+- Run API Server on port `3000` e.g. [`http://127.0.01:3000`]
+- Run Mailcatcher UI in development on port `1080` e.g. [`http://127.0.0.1:1080`]
