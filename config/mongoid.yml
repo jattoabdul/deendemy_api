@@ -1,24 +1,24 @@
 development:
   clients:
     default:
-      database: deendemy_api_development
-      hosts:
-        - localhost:27017
+      uri: <%= ENV['MONGO_URI'] %>
       options:
+        user: test
+        password: test
         server_selection_timeout: 5
-        ssl: true
+        # ssl: true
   options:
-    app_name: DeenDemyAPI
+    app_name: DeendemyAPI
 
 test:
   clients:
     default:
-      database: deendemy_api_test
-      hosts:
-        - localhost:27017
+      uri: <%= ENV['MONGO_URI'] %>
       options:
+        user: test
+        password: test
         read:
           mode: :primary
         max_pool_size: 1
-  # options:
-    # app_name: DeenDemyAPI
+  options:
+  app_name: DeendemyAPI

@@ -13,6 +13,7 @@ ENV APP_ENV=$APP_ENV
 RUN apk add --no-cache \
   libstdc++ \
   sqlite-libs
+RUN apk add supervisor
 RUN apk add --virtual build-dependencies build-base
 RUN apk add --virtual build-dependencies \
   gcc \
@@ -52,12 +53,19 @@ ADD Gemfile* $APP_HOME/
 RUN gem install foreman
 RUN gem install bundler
 RUN gem install mailcatcher -v 0.6.5
+
+# Custom Supervisord config
+COPY supervisord.ini /etc/supervisor.d/supervisord.ini
+COPY supervisord.ini /etc/supervisord.conf
+COPY supervisord.ini /etc/supervisor/conf.d/supervisord.ini 
+
 # Install dependancies
 RUN bundle install
 
 # RUN apk del build-dependencies
 
 # Copy over our application code
+COPY start.sh /start.sh
 ADD . $APP_HOME
 
 EXPOSE 3000 1025 1080
@@ -67,5 +75,5 @@ EXPOSE 3000 1025 1080
 # RUN chmod +x ./cc-test-reporter
 
 # Run our app start script
-# RUN chmod +x start.sh
-# CMD ./start.sh
+RUN chmod +x start.sh
+CMD ./start.sh

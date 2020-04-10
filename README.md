@@ -1,4 +1,4 @@
-# DeenDemy
+# Deendemy
 
 > A simple app.
 
