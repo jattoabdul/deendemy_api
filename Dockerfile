@@ -67,5 +67,5 @@ EXPOSE 3000 1025 1080
 # RUN chmod +x ./cc-test-reporter
 
 # Run our app start script
-RUN chmod +x start.sh
+# RUN chmod +x start.sh
 # CMD ./start.sh
