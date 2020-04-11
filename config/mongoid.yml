@@ -1,10 +1,14 @@
 development:
   clients:
     default:
+      # uri: mongodb://deendemy_db:27017
       database: deendemy_development
       hosts:
-          - localhost:27017
+          - deendemy_db:27017
+          - 127.0.0.1:27017
       options:
+        user: test
+        password: test
         server_selection_timeout: 5
         # ssl: true
   options:
@@ -13,12 +17,16 @@ development:
 test:
   clients:
     default:
+      # uri: mongodb://deendemy_db:27017
       database: deendemy_test
       hosts:
-        - localhost:27017
+          - deendemy_db:27017
+          - 127.0.0.1:27017
       options:
+        user: test
+        password: test
         read:
           mode: :primary
         max_pool_size: 1
   options:
-    app_name: DeendemyAPI
+    app_name: DeendemyTestAPI
