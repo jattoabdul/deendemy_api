@@ -34,7 +34,10 @@ module DeendemyApi
         origins '*'
 
         # resource '/assets/*', headers: :any, methods: [:options, :head]
-        resource '*', headers: :any, methods: [:get, :post, :put, :patch]
+        resource '*',
+        headers: :any,
+        # expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+        methods: [:get, :post, :options, :put, :patch]
       end
     end
   
