@@ -12,7 +12,8 @@ require 'shoulda/matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
+# Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
 RSpec.configure do |config|
   # Remove this line to enable support for ActiveRecord
@@ -67,18 +68,6 @@ RSpec.configure do |config|
       Bullet.perform_out_of_channel_notifications if Bullet.notification?
       Bullet.end_request
     end
-  end
-
-  # should be able to fix via vcr..
-  config.before(:each) do |example|
-    # Always allow Twilio phone number validation to pass
-    # allow_any_instance_of(TwilioValidator).to receive(:validate)
-
-    # # Skip send_customer_action Event creation
-    # unless example.full_description.match?(/^NotificationHelper/)
-    #   allow_any_instance_of(NotificationHelper).to receive(:send_customer_action).and_return(true)
-    #   allow_any_instance_of(NotificationHelper).to receive(:send_channel_action).and_return(true)
-    # end
   end
 end
 

@@ -1,13 +1,10 @@
 development:
   clients:
     default:
-      database: deendemy_test
+      database: deendemy_development
       hosts:
           - localhost:27017
       options:
-        user: test
-        password: test
-        auth_source: admin
         server_selection_timeout: 5
         # ssl: true
   options:
@@ -20,9 +17,6 @@ test:
       hosts:
         - localhost:27017
       options:
-        user: test
-        password: test
-        auth_source: admin
         read:
           mode: :primary
         max_pool_size: 1

@@ -1,4 +1,5 @@
 require_relative 'boot'
+require_relative '../app/middleware/rescue_json_parse_errors'
 
 require "rails"
 # Pick the frameworks you want:
@@ -28,13 +29,18 @@ module DeendemyApi
 
     config.middleware.use Rack::Attack
 
+    config.middleware.use RescueJsonParseErrors
+
     # Cors Setup
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
 
         # resource '/assets/*', headers: :any, methods: [:options, :head]
-        resource '*', headers: :any, methods: [:get, :post, :put, :patch]
+        resource '*',
+        headers: :any,
+        # expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+        methods: [:get, :post, :options, :put, :patch]
       end
     end
   
