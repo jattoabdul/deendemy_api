@@ -1,4 +1,5 @@
 require_relative 'boot'
+require_relative '../app/middleware/rescue_json_parse_errors'
 
 require "rails"
 # Pick the frameworks you want:
@@ -27,6 +28,8 @@ module DeendemyApi
     config.active_job.queue_adapter = :sidekiq
 
     config.middleware.use Rack::Attack
+
+    config.middleware.use RescueJsonParseErrors
 
     # Cors Setup
     config.middleware.insert_before 0, Rack::Cors do
