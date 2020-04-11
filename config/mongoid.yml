@@ -5,10 +5,8 @@ development:
       database: deendemy_development
       hosts:
           - deendemy_db:27017
-          - 127.0.0.1:27017
+          # - 127.0.0.1:27017
       options:
-        user: test
-        password: test
         server_selection_timeout: 5
         # ssl: true
   options:
@@ -21,10 +19,8 @@ test:
       database: deendemy_test
       hosts:
           - deendemy_db:27017
-          - 127.0.0.1:27017
+          # - 127.0.0.1:27017
       options:
-        user: test
-        password: test
         read:
           mode: :primary
         max_pool_size: 1
