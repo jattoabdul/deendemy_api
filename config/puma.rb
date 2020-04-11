@@ -30,7 +30,3 @@ end
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
-
-# PROCFILE
-# web: bundle exec puma  -p 3000 -C config/puma.rb
-# worker: RAILS_MAX_THREADS=25 bundle exec sidekiq -C config/sidekiq.yml
