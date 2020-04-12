@@ -6,15 +6,15 @@ class User
   include Mongoid::Locker
 
   extend Devise::Models #added this line to extend devise model
-
+  # TODO: fix this file and the devise initializer files
   field :locker_locked_at, type: Time
-  field :locker_locked_until, type: Time
+  # field :locker_locked_until, type: Time
 
-  locker locked_at_field: :locker_locked_at,
-         locked_until_field: :locker_locked_until
+  locker locked_at_field: :locker_locked_at
+        #  locked_until_field: :locker_locked_until
 
   ## Database authenticatable
-  field :email,              type: String, default: ''
+  field :email, type: String, default: ''
   field :encrypted_password, type: String, default: ''
 
   ## Recoverable
@@ -25,6 +25,13 @@ class User
 
   ## Rememberable
   field :remember_created_at, type: Time
+
+  ## Trackable
+  field :sign_in_count,      type: Integer, default: 0
+  field :current_sign_in_at, type: Time
+  field :last_sign_in_at,    type: Time
+  field :current_sign_in_ip, type: String
+  field :last_sign_in_ip,    type: String
 
   ## Confirmable
   field :confirmation_token,   type: String
@@ -44,10 +51,15 @@ class User
   ## Tokens
   field :tokens, type: Hash, default: {}
 
+  # Hooks
+  before_validation do
+    self.uid = email if uid.blank?
+  end
+
   # Include default devise modules. Others available are:
   # , :confirmable, :trackable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :trackable, :confirmable, :validatable
   include DeviseTokenAuth::Concerns::User
 
   index({ email: 1 }, { name: 'email_index', unique: true, background: true })
@@ -59,5 +71,10 @@ class User
   # Added as a hack to avoid the error on create
   def saved_change_to_attribute?(attr_name, **options)
     true
+  end
+
+  protected
+  def confirmation_required?
+    false
   end
 end

@@ -1,16 +1,38 @@
 Devise.setup do |config|
-  # The e-mail address that mail will appear to be sent from
-  # If absent, mail is sent from "please-change-me-at-config-initializers-devise@example.com"
+  # ==> Mailer Configuration
   config.mailer_sender = "support@deendemy.com"
 
   # ==> ORM configuration
-  # Load and configure the ORM. Supports :active_record (default) and
-  # :mongoid (bson_ext recommended) by default. Other ORMs may be
-  # available as additional gems.
   require 'devise/orm/mongoid'
 
-  # If using rails-api, you may want to tell devise to not use ActionDispatch::Flash
-  # middleware b/c rails-api does not include it.
-  # See: https://stackoverflow.com/q/19600905/806956
+  # ==> Configuration for any authentication mechanism
+  config.case_insensitive_keys = [:email]
+  config.strip_whitespace_keys = [:email]
+  config.skip_session_storage = [:http_auth]
+
+  # ==> Configuration for :database_authenticatable
+  config.stretches = Rails.env.test? ? 1 : 11
+
+  # ==> Configuration for :confirmable
+  config.reconfirmable = true
+  config.confirmation_keys = [ :email ]
+  config.allow_unconfirmed_access_for = 365.days
+
+  # ==> Configuration for :rememberable
+  config.expire_all_remember_me_on_sign_out = true
+
+  # ==> Configuration for :validatable
+  config.password_length = 6..128
+  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+
+  # ==> Configuration for :lockable
+  config.reset_password_within = 6.hours
+
+  # ==> Navigation configuration
+  config.sign_out_via = :delete
   config.navigational_formats = [:json]
+
+  # ==> OmniAuth
+  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+
 end
