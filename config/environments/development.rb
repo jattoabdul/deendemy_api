@@ -35,7 +35,7 @@ Rails.application.configure do
   # Send emails to test server
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: '127.0.0.1',
+    address: 'deendemy_mailcatcher', # || 0.0.0.0
     port: 1025,
     openssl_verify_mode: 'none'
   }
