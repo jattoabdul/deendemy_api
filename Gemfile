@@ -23,7 +23,7 @@ gem 'ice_nine', '~> 0.11'
 
 # USER
 # gem 'devise', '~> 4.7'
-gem 'devise_token_auth'
+gem 'devise_token_auth', :git => 'https://github.com/lynndylanhurley/devise_token_auth.git', :branch => 'master'
 # gem 'omniauth-github'
 # gem 'omniauth-facebook'
 # gem 'omniauth-google-oauth2'
