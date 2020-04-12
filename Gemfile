@@ -134,6 +134,6 @@ end
 # GUARD / AUTO TEST
 group :test, :development do
   gem 'factory_bot_rails', require: false
-  gem 'faker', require: false
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 end
 
