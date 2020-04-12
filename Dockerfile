@@ -29,8 +29,8 @@ RUN apk add --virtual build-dependencies \
   libc-dev \
   make \
   g++ \
-  zlib-dev
-# git
+  zlib-dev \
+  git
 
 # The following are used to trim down the size of the image by removing unneeded data
 # && apt-get clean autoclean \
