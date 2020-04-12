@@ -32,7 +32,6 @@ RSpec.configure do |config|
   config.include Mongoid::Matchers, type: :model
 
   config.include Rails.application.routes.url_helpers
-  # config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Helpers
 
    # Configuration for Shoulda Gem. Used to complement tests.

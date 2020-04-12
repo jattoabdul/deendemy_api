@@ -22,12 +22,6 @@ gem 'countries', '~> 3.0'
 gem 'ice_nine', '~> 0.11'
 
 # USER
-# gem 'devise', '~> 4.7'
-gem 'devise_token_auth'
-# gem 'omniauth-github'
-# gem 'omniauth-facebook'
-# gem 'omniauth-google-oauth2'
-# gem 'omniauth-apple'
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'phony_rails', '~> 0.14'
 # gem 'StreetAddress', require: 'street_address'
