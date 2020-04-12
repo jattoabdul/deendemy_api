@@ -7,6 +7,12 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
 
+    namespace :api, defaults: { format: :json } do
+        scope :v1 do
+          mount_devise_token_auth_for 'User', at: 'auth'
+        end
+    end
+
     # post '/v1/authenticate', to: 'application#authentication_check'
 
     # root to: 'home#index', via: :all

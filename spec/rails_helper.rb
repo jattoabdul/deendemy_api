@@ -7,6 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'devise'
 require 'mongoid-rspec'
 require 'shoulda/matchers'
 
@@ -32,10 +33,26 @@ RSpec.configure do |config|
   config.include Mongoid::Matchers, type: :model
 
   config.include Rails.application.routes.url_helpers
-  # config.include Devise::Test::ControllerHelpers, type: :controller
+
+  Warden.test_mode!
+
+  config.after do
+    Warden.test_reset!
+  end
+
   config.include Helpers
 
-   # Configuration for Shoulda Gem. Used to complement tests.
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  # config.include Requests::AuthHelpers::Includables, type: :controller
+  # config.extend Requests::AuthHelpers::Extensions, type: :controller
+
+  config.include Devise::Test::ControllerHelpers, type: :view
+
+  # config.include Devise::Test::ControllerHelpers, type: :request
+  config.include Requests::AuthHelpers::Includables, type: :request
+  config.extend Requests::AuthHelpers::Extensions, type: :request
+
+  # Configuration for Shoulda Gem. Used to complement tests.
   Shoulda::Matchers.configure do |sconfig|
     sconfig.integrate do |with|
       with.test_framework :rspec
