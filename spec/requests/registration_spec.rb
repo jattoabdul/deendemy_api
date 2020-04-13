@@ -7,7 +7,7 @@ RSpec.describe "Registration", type: :request do
       email: 'user@example.com',
       password: '12345678',
       password_confirmation: '12345678',
-      confirm_success_url: 'http://example.com'
+      confirm_success_url: 'http://example.com' # to be removed once I figure default_confirm_success_url config
     }
   end
   describe 'Email registration method' do
