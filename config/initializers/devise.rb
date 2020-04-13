@@ -16,7 +16,7 @@ Devise.setup do |config|
   # ==> Configuration for :confirmable
   config.reconfirmable = true
   config.confirmation_keys = [ :email ]
-  config.allow_unconfirmed_access_for = 365.days
+  # config.allow_unconfirmed_access_for = 365.days
 
   # ==> Configuration for :rememberable
   config.expire_all_remember_me_on_sign_out = true
