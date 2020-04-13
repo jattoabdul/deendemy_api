@@ -33,7 +33,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Send emails to test server
-  config.action_mailer.default_url_options = { host: 'deendemy_mailcatcher' } # || 0.0.0.0
+  config.action_mailer.default_url_options = { host: ENV.fetch('APPLICATION_HOST', 'deendemy_mailcatcher') }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'deendemy_mailcatcher', # || 0.0.0.0
