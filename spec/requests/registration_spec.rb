@@ -6,7 +6,8 @@ RSpec.describe "Registration", type: :request do
     @signup_params = {
       email: 'user@example.com',
       password: '12345678',
-      password_confirmation: '12345678'
+      password_confirmation: '12345678',
+      confirm_success_url: 'http://example.com'
     }
   end
   describe 'Email registration method' do
