@@ -13,7 +13,11 @@ Rails.application.routes.draw do
         end
     end
 
-    # post '/v1/authenticate', to: 'application#authentication_check'
+    namespace :api, defaults: { format: :json } do
+        namespace :v1 do
+          # API v1 routes go here
+        end
+    end
 
     # root to: 'home#index', via: :all
 end
