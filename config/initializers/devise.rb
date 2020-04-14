@@ -10,6 +10,9 @@ Devise.setup do |config|
   config.strip_whitespace_keys = [:email]
   config.skip_session_storage = [:http_auth]
 
+  # ==> Config for Parent Controller
+  # config.parent_controller = 'Api::V1::ApplicationController'
+
   # ==> Configuration for :database_authenticatable
   config.stretches = Rails.env.test? ? 1 : 11
 

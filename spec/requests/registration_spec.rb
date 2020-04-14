@@ -2,34 +2,30 @@ require "rails_helper"
 
 RSpec.describe "Registration", type: :request do
   before(:each) do
-    @sign_up_url = '/api/v1/auth/' 
+    @sign_up_url = '/auth/' 
     @signup_params = {
       email: 'user@example.com',
       password: '12345678',
       password_confirmation: '12345678',
-      confirm_success_url: 'http://example.com' # to be removed once I figure default_confirm_success_url config
+      confirm_success_url: 'http://example.com',
+      first_name: "Ademola10",
+      last_name: "Jatto",
+      country: "Nigeria",
+      zip: "100276",
+      state: "Lagos",
+      city: "Isolo",
+      street: "15 Ganiyu Sogunle Street",
+      roles: ["learner"]
     }
   end
   describe 'Email registration method' do
-    describe 'POST /api/v1/auth/' do
+    describe 'POST /auth/' do
       context 'when signup params is valid' do
         before do
           post @sign_up_url, params: @signup_params
         end
         it 'returns status 200' do
           expect(response).to have_http_status(200)
-        end
-        it 'returns authentication header with right attributes' do
-          expect(response.headers['access-token']).to be_present
-        end
-        it 'returns client in authentication header' do
-          expect(response.headers['client']).to be_present
-        end
-        it 'returns expiry in authentication header' do
-          expect(response.headers['expiry']).to be_present
-        end
-        it 'returns uid in authentication header' do
-          expect(response.headers['uid']).to be_present
         end
         it 'returns status success' do
           parsed_response = JSON.parse(response.body)

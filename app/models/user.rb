@@ -6,7 +6,7 @@ class User
   include Mongoid::Locker
 
   extend Devise::Models #added this line to extend devise model
-  # TODO: fix this file and the devise initializer files
+
   field :locker_locked_at, type: Time
   # field :locker_locked_until, type: Time
 
@@ -44,6 +44,18 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
 
+  # Custom User Attributes
+  field :first_name,   type: String
+  field :last_name,   type: String
+  field :country,   type: String # validate must exist
+  field :zip,   type: String # validate to have > 5 or <=10 characters
+  field :state,   type: String
+  field :city,   type: String
+  field :street,   type: String
+
+  # Roles and Permissions
+  field :roles,   type: Array, default: []
+
   ## Required
   field :provider, type: String
   field :uid,      type: String, default: ''
@@ -55,6 +67,10 @@ class User
   before_validation do
     self.uid = email if uid.blank?
   end
+
+  # Validations
+  validates :zip, length: { within: 5..10 }
+  validates :country, :first_name, :last_name, presence: true
 
   # Include default devise modules. Others available are:
   # , :confirmable, :trackable, :lockable, :timeoutable and :omniauthable
@@ -71,10 +87,5 @@ class User
   # Added as a hack to avoid the error on create
   def saved_change_to_attribute?(attr_name, **options)
     true
-  end
-
-  protected
-  def confirmation_required?
-    false
   end
 end
