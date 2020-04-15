@@ -11,7 +11,7 @@ class RescueJsonParseErrors
       error_output = "There was a problem in the JSON you submitted: #{e}"
       [
         400, { 'Content-Type' => 'application/json' },
-        [{ code: 'BadRequest', error: error_output }.to_json]
+        [{ error: { code: 'BadRequest', message: error_output } }.to_json]
       ]
     else
       raise e
