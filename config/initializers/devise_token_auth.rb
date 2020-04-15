@@ -3,10 +3,11 @@ DeviseTokenAuth.setup do |config|
   # config.enable_standard_devise_support = true
   # config.bypass_sign_in = false
   # config.require_client_password_reset_token = true
-  # config.send_confirmation_email = true
+  config.send_confirmation_email = true
   config.remove_tokens_after_password_reset = true
   config.token_cost = Rails.env.test? ? 4 : 10
   config.token_lifespan = 2.weeks
   config.max_number_of_devices = 5
+  config.default_password_reset_url = ENV.fetch('PASSWORD_RESET_URL', 'http://example.com/password-reset')
   # config.default_confirm_success_url = ENV.fetch('SIGNUP_CONFIRM_SUCCESS_URL', 'http://example.com')
 end
