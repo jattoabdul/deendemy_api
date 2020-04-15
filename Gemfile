@@ -35,7 +35,7 @@ gem 'devise_token_auth', :git => 'https://github.com/lynndylanhurley/devise_toke
 # JSON, API SEC
 gem 'oj', '~> 3.9'
 # gem 'jbuilder', '~> 2.9'
-gem 'jsonapi-rails', '~> 0.4'
+gem 'active_model_serializers', '~> 0.10.7'
 gem 'jwt', '~> 2.2'
 
 # STATEMACHINE
