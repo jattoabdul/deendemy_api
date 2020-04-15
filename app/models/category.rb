@@ -3,4 +3,7 @@ class Category
 
   # Fields
   field :name, type: String
+
+  # Validations
+  validates :name, presence: true, uniqueness: true
 end
