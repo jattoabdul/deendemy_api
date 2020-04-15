@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HomeController < BaseController
 
   # GET, POST api.domain.tld
   def index
