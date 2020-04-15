@@ -11,8 +11,7 @@ Devise.setup do |config|
   config.skip_session_storage = [:http_auth]
 
   # ==> Config for Parent Controller
-  # config.parent_controller = 'Api::V1::ApplicationController'
-  config.parent_controller = 'BaseController'
+  # config.parent_controller = 'BaseController'
 
   # ==> Configuration for :database_authenticatable
   config.stretches = Rails.env.test? ? 1 : 11
