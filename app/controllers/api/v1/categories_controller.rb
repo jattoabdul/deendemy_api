@@ -1,4 +1,5 @@
 class Api::V1::CategoriesController < Api::V1::ApplicationController
+  include ErrorSerializer
   before_action :set_category, only: [:show, :update, :destroy]
 
   # GET /categories
@@ -20,7 +21,7 @@ class Api::V1::CategoriesController < Api::V1::ApplicationController
     if @category.save
       render json: @category, status: :created
     else
-      render json: @category.errors, status: :unprocessable_entity
+      render json: ErrorSerializer.serialize(@category.errors), status: :unprocessable_entity
     end
   end
 
@@ -29,7 +30,7 @@ class Api::V1::CategoriesController < Api::V1::ApplicationController
     if @category.update(category_params)
       render json: @category
     else
-      render json: @category.errors, status: :unprocessable_entity
+      render json: ErrorSerializer.serialize(@category.errors), status: :unprocessable_entity
     end
   end
 
