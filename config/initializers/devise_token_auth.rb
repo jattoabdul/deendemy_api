@@ -9,6 +9,7 @@ DeviseTokenAuth.setup do |config|
   config.token_lifespan = 2.weeks
   config.max_number_of_devices = 5
   config.default_password_reset_url = ENV.fetch('PASSWORD_RESET_URL', 'http://example.com/password-reset')
+  # config.require_client_password_reset_token = true
   config.default_confirm_success_url = ENV.fetch('SIGNUP_CONFIRM_SUCCESS_URL', 'http://example.com')
   # NB: pass this as param to signup if confirm success redirect does not work => "confirm_success_url": "https://jatto.tech",
 end
