@@ -3,7 +3,8 @@ module Deendemy
     # @param event [Event]
     # @return [True]
     def emit(event)
-      ActionCable.server.broadcast('events', event.serialize)
+      event = ActiveModelSerializers::SerializableResource.new(event).as_json
+      ActionCable.server.broadcast('events', event)
       true
     end
   end
