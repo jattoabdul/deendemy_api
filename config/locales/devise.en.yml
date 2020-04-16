@@ -1,0 +1,7 @@
+en:
+  devise:
+    mailer:
+      confirmation_instructions:
+        subject: "Please confirm your e-mail address"
+      reset_password_instructions:
+        subject: "Reset password request"

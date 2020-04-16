@@ -22,6 +22,12 @@ gem 'countries', '~> 3.0'
 gem 'ice_nine', '~> 0.11'
 
 # USER
+# gem 'devise', '~> 4.7'
+gem 'devise_token_auth', :git => 'https://github.com/lynndylanhurley/devise_token_auth.git', :branch => 'master'
+# gem 'omniauth-github'
+# gem 'omniauth-facebook'
+# gem 'omniauth-google-oauth2'
+# gem 'omniauth-apple'
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'phony_rails', '~> 0.14'
 # gem 'StreetAddress', require: 'street_address'
@@ -29,7 +35,7 @@ gem 'ice_nine', '~> 0.11'
 # JSON, API SEC
 gem 'oj', '~> 3.9'
 # gem 'jbuilder', '~> 2.9'
-gem 'jsonapi-rails', '~> 0.4'
+gem 'active_model_serializers', '~> 0.10.7'
 gem 'jwt', '~> 2.2'
 
 # STATEMACHINE
