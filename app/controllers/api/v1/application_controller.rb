@@ -1,6 +1,8 @@
 module Api
   module V1
     class ApplicationController < ApplicationController
+      include Api::V1::Permissionable
+
       before_action :authenticate_api_v1_user!
       after_action :tag_request, if: -> { current_api_v1_user.present? }
 

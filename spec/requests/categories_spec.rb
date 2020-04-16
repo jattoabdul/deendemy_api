@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "/categories", type: :request do
   describe 'Authorized user' do
-    let(:user) { build :user }
+    let(:user) { build :user, :admin_only }
     sign_in(:user)
     let(:valid_attributes) { attributes_for(:category) }
   
