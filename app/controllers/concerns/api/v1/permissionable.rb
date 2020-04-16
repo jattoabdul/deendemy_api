@@ -14,10 +14,10 @@ module Api::V1::Permissionable
         learner: [ :index, :show ]
       },
       events: {
-        admin: [ :index, :create, :show, :update, :destroy ],
-        support: [ :index, :create, :show ],
-        tutor: [ :create ],
-        learner: [ :create ]
+        admin: [ :index, :show, :my_events ],
+        support: [ :index, :show, :my_events ],
+        tutor: [ :my_events ],
+        learner: [:my_events ]
       }
     }
   end
