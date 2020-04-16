@@ -12,6 +12,12 @@ module Api::V1::Permissionable
         support: [ :index, :create, :show, :update ],
         tutor: [ :index, :show ],
         learner: [ :index, :show ]
+      },
+      events: {
+        admin: [ :index, :show, :my_events ],
+        support: [ :index, :show, :my_events ],
+        tutor: [ :my_events ],
+        learner: [:my_events ]
       }
     }
   end

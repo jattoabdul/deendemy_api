@@ -11,11 +11,15 @@ Rails.application.routes.draw do
           # API v1 routes go here
           mount_devise_token_auth_for 'User', as: 'v1', at: 'auth'
 
+          resources :events, only: [:index, :show]
           resources :categories, only: [:index, :show, :create, :update, :destroy]
 
           root to: 'home#index', via: :all
         end
     end
+
+    # Websocket event listener
+    # mount ActionCable.server => '/cable'
 
     root to: 'home#index', via: :all
 end
