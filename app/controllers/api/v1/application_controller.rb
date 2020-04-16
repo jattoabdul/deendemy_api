@@ -5,9 +5,10 @@ module Api
       after_action :tag_request, if: -> { current_api_v1_user.present? }
 
       rescue_from StandardError, with: :internal_server_error unless Rails.env.development?
-      # TODO: figure out how to rescue mongo db errors
-      # rescue_from Mongoid::Errors::DocumentNotFound, with: :not_found_error
-      # rescue_from ActiveRecord::RecordInvalid, with: :invalid_error
+      rescue_from Mongoid::Errors::DocumentNotFound, with: :not_found_error
+      rescue_from Mongo::Error::InvalidDocument, with: :invalid_error
+      rescue_from Mongoid::Errors::InvalidCollection, with: :invalid_error
+      # TODO: figure out how to rescue mongo db unique errors
       # rescue_from ActiveRecord::RecordNotUnique, with: :conflict_error
       rescue_from ActionController::ParameterMissing, with: :parameter_missing_error
       rescue_from ActionController::BadRequest, with: :bad_request_error
@@ -31,7 +32,7 @@ module Api
 
       # @param e [ActiveRecord::RecordNotFound]
       def not_found_error(e)
-        error('RecordNotFound', "The requested #{e.model} doesn't exist.", 404)
+        error('RecordNotFound', "The requested #{e.problem}", 404)
       end
 
       def conflict_error
