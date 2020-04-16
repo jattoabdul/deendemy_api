@@ -11,6 +11,7 @@ Rails.application.routes.draw do
           # API v1 routes go here
           mount_devise_token_auth_for 'User', as: 'v1', at: 'auth'
 
+          resources :events, only: [:index, :show, :my_events]
           resources :categories, only: [:index, :show, :create, :update, :destroy]
 
           root to: 'home#index', via: :all
