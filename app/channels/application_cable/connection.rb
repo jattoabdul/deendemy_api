@@ -9,15 +9,9 @@ module ApplicationCable
 
     protected
 
-    def find_verified_user # this checks whether a user is authenticated with devise_token_auth
-      # params = request.query_parameters()
-      # uid = params[:uid]
-      # token = params[:token]
-      # client_id = params[:client]
-
+    def find_verified_user # this checks whether a user is authenticated by passing user uid
       user = User.find_by_uid(uid)
 
-      # if user && user.valid_token?(token, client_id)
       if user = User.find_by_uid(request.params[:uid])
         user
       else          
