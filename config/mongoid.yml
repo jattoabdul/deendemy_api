@@ -1,11 +1,12 @@
 development:
   clients:
     default:
-      # uri: mongodb://deendemy_db:27017
       database: deendemy_development
       hosts:
-          - deendemy_db:27017
-          # - 127.0.0.1:27017
+        # with docker
+        - deendemy_db:27017
+        # without docker
+        # - 127.0.0.1:27017
       options:
         server_selection_timeout: 5
         # ssl: true
@@ -15,11 +16,12 @@ development:
 test:
   clients:
     default:
-      # uri: mongodb://deendemy_db:27017
       database: deendemy_test
       hosts:
-          - deendemy_db:27017
-          # - 127.0.0.1:27017
+        # with docker
+        - deendemy_db:27017 
+        # without docker
+        # - 127.0.0.1:27017
       options:
         read:
           mode: :primary

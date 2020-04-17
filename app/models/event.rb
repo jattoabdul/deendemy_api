@@ -14,7 +14,6 @@ class Event
   ].freeze
 
   after_create do
-    # EmitEventJob.new.perform(id, 'Deendemy::ActionCableDispatcher') if CABLE_EVENTS.include?(name)
-    EmitEventJob.perform_async(id, 'Deendemy::ActionCableDispatcher') if CABLE_EVENTS.include?(name)
+    EmitEventJob.perform_async(id.to_s, 'Deendemy::ActionCableDispatcher') if CABLE_EVENTS.include?(name)
   end
 end
