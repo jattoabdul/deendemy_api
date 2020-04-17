@@ -24,7 +24,8 @@ module Api::V1::Permissionable
 
   def check_permission
     controller_permissions = permissions[controller_name.to_sym]
-    roles = current_api_v1_user.roles.map &:to_sym
+    roles = current_api_v1_user.roles.map &:to_sym if current_api_v1_user.present?
+    roles ||= []
     if !(controller_permissions.keys & roles).empty?
       actions = []
       (controller_permissions.keys & roles).each do |action| 

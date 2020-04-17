@@ -9,7 +9,7 @@ class Category
   # Validations
   validates :name, presence: true, uniqueness: true
 
-  # Callbacks
+  # Hooks/Callbacks
   after_create do
     Event.create(name: 'category.created', eventable: self, data: serialize)
   end
