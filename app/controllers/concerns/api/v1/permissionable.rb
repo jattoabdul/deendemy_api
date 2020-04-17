@@ -24,6 +24,7 @@ module Api::V1::Permissionable
 
   def check_permission
     controller_permissions = permissions[controller_name.to_sym]
+    # TODO: rescue error if user or roles not found
     roles = current_api_v1_user.roles.map &:to_sym
     if !(controller_permissions.keys & roles).empty?
       actions = []
