@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
 
     # Websocket event listener
-    # mount ActionCable.server => '/cable'
+    mount ActionCable.server => '/cable/:uid'
 
     root to: 'home#index', via: :all
 end

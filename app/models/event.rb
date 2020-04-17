@@ -8,12 +8,13 @@ class Event
   belongs_to :eventable, polymorphic: true, required: false
   validates :name, presence: true
 
-  # CABLE_EVENTS = [
-  #   # 'model.actioned',
-  #   'category.created'
-  # ].freeze
+  CABLE_EVENTS = [
+    # 'model.actioned',
+    'category.created'
+  ].freeze
 
-  # after_create do
-  #   EmitEventJob.perform_async(id, 'Deendemy::ActionCableDispatcher') if CABLE_EVENTS.include?(name)
-  # end
+  after_create do
+    # EmitEventJob.new.perform(id, 'Deendemy::ActionCableDispatcher') if CABLE_EVENTS.include?(name)
+    EmitEventJob.perform_async(id, 'Deendemy::ActionCableDispatcher') if CABLE_EVENTS.include?(name)
+  end
 end

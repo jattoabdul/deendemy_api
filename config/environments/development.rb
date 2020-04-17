@@ -27,6 +27,10 @@ Rails.application.configure do
 
   config.action_controller.default_url_options = { host: ENV.fetch('APPLICATION_HOST') }
 
+  # Mount Action Cable outside main process or domain.
+  config.action_cable.mount_path = '/cable/:uid'
+  # config.action_cable.allowed_request_origins = ['*']
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
