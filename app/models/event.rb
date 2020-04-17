@@ -10,7 +10,8 @@ class Event
 
   CABLE_EVENTS = [
     # 'model.actioned',
-    'category.created'
+    'user.created',
+    'course.created'
   ].freeze
 
   after_create do

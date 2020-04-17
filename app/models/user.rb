@@ -4,6 +4,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Locker
+  include Serializable
 
   extend Devise::Models #added this line to extend devise model
 
@@ -63,9 +64,12 @@ class User
   ## Tokens
   field :tokens, type: Hash, default: {}
 
-  # Hooks
+  # Hooks/Callbacks
   before_validation do
     self.uid = email if uid.blank?
+  end
+  after_create do
+    Event.create(name: 'user.created', eventable: self, data: serialize)
   end
 
   # Validations
