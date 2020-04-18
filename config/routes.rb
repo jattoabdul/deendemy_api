@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
           resources :events, only: [:index, :show]
           resources :categories, only: [:index, :show, :create, :update, :destroy]
+          resources :messages, only: [:index, :show, :create, :update, :destroy]
 
           root to: 'home#index', via: :all
         end
