@@ -17,6 +17,7 @@ gem 'active_hash', '~> 2.3'
 # DATA
 gem 'mongoid', '~> 7.0.5'
 gem 'mongoid-locker'
+gem 'enumerize'
 gem 'bson_ext'
 gem 'countries', '~> 3.0'
 gem 'ice_nine', '~> 0.11'
