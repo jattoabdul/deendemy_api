@@ -75,7 +75,8 @@ gem 'sidekiq-scheduler', '~> 3.0'
 gem 'rack-heartbeat', '~> 1.1'
 gem 'rack-timeout', '~> 0.5'
 gem 'rack-attack', '~> 6.1'
-gem 'rack-cors', '~> 1.0'
+# gem 'rack-cors', '~> 1.0'
+gem 'rack-cors', '~> 1.1'
 
 # REPORTING & MONITORING
 gem 'sentry-raven', '~> 2.11'

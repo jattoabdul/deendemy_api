@@ -523,7 +523,7 @@ DEPENDENCIES
   puma (~> 4.3)
   puma_worker_killer (~> 0.1.1)
   rack-attack (~> 6.1)
-  rack-cors (~> 1.0)
+  rack-cors (~> 1.1)
   rack-heartbeat (~> 1.1)
   rack-timeout (~> 0.5)
   rails (~> 6.0.2, >= 6.0.2.2)

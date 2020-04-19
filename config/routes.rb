@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
 
+    match '*all', controller: 'application', action: 'cors_preflight_check', via: [:options]
+
     namespace :api, defaults: { format: :json } do
         namespace :v1 do
           # API v1 routes go here
@@ -13,8 +15,9 @@ Rails.application.routes.draw do
 
           resources :events, only: [:index, :show]
           resources :categories, only: [:index, :show, :create, :update, :destroy]
-          resources :conversations, only: [:index, :show, :create, :destroy]
-          resources :messages, only: [:index, :show, :create, :destroy]
+          resources :conversations, only: [:index, :create], shallow: true do
+            resources :messages, only: [:index, :create]
+          end
 
           root to: 'home#index', via: :all
         end
