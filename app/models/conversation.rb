@@ -1,6 +1,7 @@
 class Conversation
   include Mongoid::Document
   include Eventable
+  include Notifiable
   include Serializable
 
   # Fields

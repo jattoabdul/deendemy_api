@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notifications
   # Sidekiq GUI for job monitoring
     if Rails.env.development?
       require 'sidekiq/web'
@@ -15,8 +16,20 @@ Rails.application.routes.draw do
 
           resources :events, only: [:index, :show]
           resources :categories, only: [:index, :show, :create, :update, :destroy]
+
           resources :conversations, only: [:index, :create], shallow: true do
             resources :messages, only: [:index, :create]
+          end
+          post '/conversations/messages' => 'messages#bulk_create' # /conversations/messages
+
+          resources :notifications, only: [:index, :show] do
+            member do
+              match '/read' => :mark_as_read, via: [:post, :put, :patch] # /notifications/:id/read
+            end
+            collection do
+              post '/read' => :mark_all_as_read # /notifications/read
+              post '/read/all' => :mark_all_as_read
+            end
           end
 
           root to: 'home#index', via: :all

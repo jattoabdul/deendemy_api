@@ -2,6 +2,7 @@ class Message
   include Mongoid::Document
   include Mongoid::Timestamps::Created
   include Eventable
+  include Notifiable
   include Serializable
   extend Enumerize
 
@@ -27,7 +28,7 @@ class Message
   after_create do
     Event.create(name: 'message.created', eventable: self, data: serialize)
     EmitNewMessageJob.perform_async(id.to_s, 'Deendemy::MessageActionCableDispatcher')
-    # emit notification(message) for self.receiver of this message from self.sender
+    create_notifications # NB: not necessary to loop in this function, change later
     # emit total_unread_message_count for self.receiver of this message
   end
 
@@ -44,5 +45,17 @@ class Message
 
   def message_time
     created_at.strftime("%d/%m/%y at %l:%M %p")
+  end
+
+  def recipients
+    # ([comment.article.user] + comment.article.reload.commented_users.to_a - [comment.user]).uniq
+    [receiver].uniq
+  end
+
+  def create_notifications
+    recipients.each do |recipient|
+      Notification.create(recipient: recipient, actor: sender,
+        action: 'message_created', notifiable: self, data: serialize)
+    end
   end
 end

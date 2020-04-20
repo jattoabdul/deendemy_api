@@ -68,6 +68,7 @@ class User
 
   # Associations
   has_many :conversations, foreign_key: :sender_id
+  has_many :notifications, foreign_key: :recipient_id
 
   # Hooks/Callbacks
   before_validation do
