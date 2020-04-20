@@ -4,6 +4,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Locker
+  include Eventable
   include Serializable
 
   extend Devise::Models #added this line to extend devise model
@@ -48,8 +49,9 @@ class User
   # Custom User Attributes
   field :first_name,   type: String
   field :last_name,   type: String
-  field :country,   type: String # validate must exist
-  field :zip,   type: String # validate to have > 5 or <=10 characters
+  field :country,   type: String
+  field :zip,   type: String
+  # field :time_zone,   type: String, default: 'UTC'
   field :state,   type: String
   field :city,   type: String
   field :street,   type: String
@@ -63,6 +65,9 @@ class User
 
   ## Tokens
   field :tokens, type: Hash, default: {}
+
+  # Associations
+  has_many :conversations, foreign_key: :sender_id
 
   # Hooks/Callbacks
   before_validation do
