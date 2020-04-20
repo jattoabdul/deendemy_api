@@ -14,6 +14,7 @@ production:
   - ['mailers', 5]
   - ['important', 4]
   - ['events', 3]
+  - ['messages', 2]
   - ['default', 2]
   - ['analytics', 1]
   - ['searchkick', 1]
