@@ -18,6 +18,18 @@ module Api::V1::Permissionable
         support: [ :index, :show, :my_events ],
         tutor: [ :my_events ],
         learner: [:my_events ]
+      },
+      conversations: {
+        admin: [ :index, :create, :show, :destroy ],
+        support: [ :index, :create, :show ],
+        tutor: [ :index, :create ],
+        learner: [:index, :create ]
+      },
+      messages: {
+        admin: [ :index, :create, :show ],
+        support: [ :index, :create, :show ],
+        tutor: [ :index, :create ],
+        learner: [:index, :create ]
       }
     }
   end
