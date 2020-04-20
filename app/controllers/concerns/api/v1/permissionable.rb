@@ -26,9 +26,9 @@ module Api::V1::Permissionable
         learner: [:index, :create ]
       },
       messages: {
-        admin: [ :index, :create, :show ],
-        support: [ :index, :create, :show ],
-        tutor: [ :index, :create ],
+        admin: [ :index, :create, :show, :bulk_create ],
+        support: [ :index, :create, :show, :bulk_create ],
+        tutor: [ :index, :create, :bulk_create ],
         learner: [:index, :create ]
       }
     }
@@ -36,6 +36,7 @@ module Api::V1::Permissionable
 
   def check_permission
     controller_permissions = permissions[controller_name.to_sym]
+    return true if controller_permissions.blank? # avoid checking permission if permission not set for controller
     roles = current_api_v1_user.roles.map &:to_sym if current_api_v1_user.present?
     roles ||= []
     if !(controller_permissions.keys & roles).empty?
