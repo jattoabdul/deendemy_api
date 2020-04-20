@@ -5,7 +5,7 @@ class EmitEventJob
   # @param id [String] Event ID
   # @param dispatcher [String]
   def perform(id, dispatcher)
-    # Ensure uncached query of event
+    # Ensure uncached query of Event
     event = Event.find(id)
     dispatcher = dispatcher.constantize.new
     dispatcher.emit(event)
