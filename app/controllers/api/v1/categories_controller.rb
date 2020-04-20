@@ -16,13 +16,9 @@ class Api::V1::CategoriesController < Api::V1::ApplicationController
 
   # POST /categories
   def create
-    @category = Category.new(category_params)
+    @category = Category.create!(category_params)
 
-    if @category.save
-      render json: @category, status: :created
-    else
-      render json: ErrorSerializer.serialize(@category.errors), status: :unprocessable_entity
-    end
+     render json: @category, status: :created
   end
 
   # PATCH/PUT /categories/1
