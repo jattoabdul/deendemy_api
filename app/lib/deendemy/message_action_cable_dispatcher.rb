@@ -1,6 +1,6 @@
 module Deendemy
   class MessageActionCableDispatcher
-    # @param event [Event]
+    # @param event [Message]
     # @return [True]
     def emit(message)
       # Emit new message action cable event for message.receiver for this message.conversation.id
