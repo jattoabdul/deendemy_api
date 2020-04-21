@@ -1,4 +1,4 @@
-module DeenDemy
+module Deendemy
   class Settings
     Phone = Struct.new(:number, :country_code)
 
@@ -33,6 +33,11 @@ module DeenDemy
     # @return [Array]
     def self.ops_email
       ['ops@deendemy.com']
+    end
+
+    # @return [Array]
+    def self.support_email
+      'support@deendemy.com'
     end
 
     # @return [Array]

@@ -1,6 +1,6 @@
 require 'jwt'
 
-module DeenDemy
+module Deendemy
   class JsonWebToken
     # @return [String]
     def self.encode(payload, expiration = 24.hours.from_now)
