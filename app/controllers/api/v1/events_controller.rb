@@ -13,13 +13,6 @@ class Api::V1::EventsController < Api::V1::ApplicationController
     render json: @event
   end
 
-  # GET /events/me
-  def my_events
-    @events = Event.all # add query for only curent_api_v1_user
-
-    render json: @events
-  end
-
   private
 
   def set_event

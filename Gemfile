@@ -17,6 +17,7 @@ gem 'active_hash', '~> 2.3'
 # DATA
 gem 'mongoid', '~> 7.0.5'
 gem 'mongoid-locker'
+gem 'enumerize'
 gem 'bson_ext'
 gem 'countries', '~> 3.0'
 gem 'ice_nine', '~> 0.11'
@@ -75,7 +76,8 @@ gem 'sidekiq-scheduler', '~> 3.0'
 gem 'rack-heartbeat', '~> 1.1'
 gem 'rack-timeout', '~> 0.5'
 gem 'rack-attack', '~> 6.1'
-gem 'rack-cors', '~> 1.0'
+# gem 'rack-cors', '~> 1.0'
+gem 'rack-cors', '~> 1.1'
 
 # REPORTING & MONITORING
 gem 'sentry-raven', '~> 2.11'

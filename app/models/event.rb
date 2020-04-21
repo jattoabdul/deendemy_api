@@ -11,10 +11,10 @@ class Event
   CABLE_EVENTS = [
     # 'model.actioned',
     'user.created',
-    'course.created'
+    'message.created'
   ].freeze
 
   after_create do
-    EmitEventJob.perform_async(id.to_s, 'Deendemy::ActionCableDispatcher') if CABLE_EVENTS.include?(name)
+    EmitEventJob.perform_async(id.to_s, 'Deendemy::EventActionCableDispatcher') if CABLE_EVENTS.include?(name)
   end
 end

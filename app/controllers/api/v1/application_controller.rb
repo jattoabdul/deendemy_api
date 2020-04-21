@@ -2,6 +2,7 @@ module Api
   module V1
     class ApplicationController < ApplicationController
       include Api::V1::Permissionable
+      include ErrorSerializer
 
       before_action :authenticate_api_v1_user!
       after_action :tag_request, if: -> { current_api_v1_user.present? }
@@ -10,6 +11,7 @@ module Api
       rescue_from Mongoid::Errors::DocumentNotFound, with: :not_found_error
       rescue_from Mongo::Error::InvalidDocument, with: :invalid_error
       rescue_from Mongoid::Errors::InvalidCollection, with: :invalid_error
+      rescue_from Mongoid::Errors::Validations, with: :invalid_error
       # TODO: figure out how to rescue mongo db unique errors
       # rescue_from ActiveRecord::RecordNotUnique, with: :conflict_error
       rescue_from ActionController::ParameterMissing, with: :parameter_missing_error
@@ -43,7 +45,8 @@ module Api
 
       # @param e [ActiveRecord::RecordInvalid]
       def invalid_error(e)
-        error('RecordInvalid', e.record.errors.to_hash, 422)
+        error('RecordInvalid', ErrorSerializer.serialize(e.record.errors), 422)
+        # error('RecordInvalid', e.record.errors.to_hash, 422)
       end
 
       # @param e [ActiveRecord::ParameterMissing]

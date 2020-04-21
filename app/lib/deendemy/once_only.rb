@@ -1,4 +1,4 @@
-module DeenDemy
+module Deendemy
   class OnceOnly
     # Performs a block only once using Redis as a store
     # @param key [String, Array]
