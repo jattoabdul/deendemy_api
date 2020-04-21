@@ -100,6 +100,9 @@ class User
   end
 
   def after_confirmation
-    UserMailer.welcome_email(id.to_s).deliver_later if confirmed_at_previous_change.first.nil?
+    if confirmed_at_previous_change.first.nil?
+      UserMailer.welcome_email(id.to_s).deliver_later
+      Notification.create(recipient: self, action: 'user_registered', notifiable: self, data: serialize)
+    end
   end
 end
