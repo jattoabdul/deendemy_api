@@ -98,4 +98,8 @@ class User
   def saved_change_to_attribute?(attr_name, **options)
     true
   end
+
+  def after_confirmation
+    UserMailer.welcome_email(id.to_s).deliver_later if confirmed_at_previous_change.first.nil?
+  end
 end
