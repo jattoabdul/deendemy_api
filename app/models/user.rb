@@ -74,6 +74,9 @@ class User
   before_validation do
     self.uid = email if uid.blank?
   end
+  before_save do
+    self.roles = roles.map { |role| role.downcase } if roles.any?
+  end
   after_create do
     Event.create(name: 'user.created', eventable: self, data: serialize)
   end
@@ -99,9 +102,15 @@ class User
     true
   end
 
+  def role_is?(role)
+    roles.include?(role)
+  end
+
   def after_confirmation
     if confirmed_at_previous_change.first.nil?
-      UserMailer.welcome_email(id.to_s).deliver_later
+      UserMailer.welcome_email(id.to_s).deliver_later if role_is?('learner')
+      # UserMailer.welcome_tutor_email(id.to_s).deliver_later if role_is?('tutor')
+      # UserMailer.welcome_staff_email(id.to_s).deliver_later if role_is?('support') || role_is?('admin')
       Notification.create(recipient: self, action: 'user_registered', notifiable: self, data: serialize)
     end
   end
