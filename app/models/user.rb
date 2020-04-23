@@ -41,6 +41,13 @@ class User
   field :confirmation_sent_at, type: Time
   field :unconfirmed_email,    type: String # Only if using reconfirmable
 
+  ## Invitable
+  field :invitation_token, type: String
+  field :invitation_created_at, type: Time
+  field :invitation_sent_at, type: Time
+  field :invitation_accepted_at, type: Time
+  field :invitation_limit, type: Integer
+
   ## Lockable
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
@@ -76,6 +83,7 @@ class User
   end
   before_save do
     self.roles = roles.map { |role| role.downcase } if roles.any?
+    self.provider = 'email' if provider.blank?
   end
   after_create do
     Event.create(name: 'user.created', eventable: self, data: serialize)
@@ -88,7 +96,7 @@ class User
   # Include default devise modules. Others available are:
   # , :confirmable, :trackable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :confirmable, :validatable
+         :recoverable, :rememberable, :trackable, :confirmable, :validatable, :invitable
   include DeviseTokenAuth::Concerns::User
 
   index({ email: 1 }, { name: 'email_index', unique: true, background: true })
@@ -96,6 +104,8 @@ class User
   index({ confirmation_token: 1 }, { name: 'confirmation_token_index', unique: true, sparse: true, background: true })
   index({ uid: 1, provider: 1}, { name: 'uid_provider_index', unique: true, background: true })
   # index({ unlock_token: 1 }, { name: 'unlock_token_index', unique: true, sparse: true, background: true })
+  index( { invitation_token: 1 }, { background: true} )
+  index( { invitation_by_id: 1 }, { background: true} )
 
   # Added as a hack to avoid the error on create
   def saved_change_to_attribute?(attr_name, **options)

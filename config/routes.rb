@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     namespace :api, defaults: { format: :json } do
         namespace :v1 do
           # API v1 routes go here
-          mount_devise_token_auth_for 'User', as: 'v1', at: 'auth'
+          mount_devise_token_auth_for 'User', as: 'v1', at: 'auth', skip: [:invitations]
+          devise_for :users, path: 'auth', only: [:invitations], controllers: { invitations: 'api/v1/invitations' }
 
           resources :events, only: [:index, :show]
           resources :categories, only: [:index, :show, :create, :update, :destroy]

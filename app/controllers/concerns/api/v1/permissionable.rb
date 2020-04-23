@@ -30,6 +30,12 @@ module Api::V1::Permissionable
         support: [ :index, :create, :show, :bulk_create ],
         tutor: [ :index, :create, :bulk_create ],
         learner: [:index, :create ]
+      },
+      invitations: {
+        admin: [ :edit, :create, :update ],
+        support: [ :edit, :update ],
+        tutor: [],
+        learner: []
       }
     }
   end
