@@ -31,7 +31,7 @@ module Api::V1::Permissionable
         tutor: [ :index, :create, :bulk_create ],
         learner: [:index, :create ]
       },
-      invitations: {
+      accounts: {
         admin: [ :edit, :create, :update ],
         support: [ :edit, :update ],
         tutor: [],

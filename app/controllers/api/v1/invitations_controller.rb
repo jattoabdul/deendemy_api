@@ -4,9 +4,15 @@ class Api::V1::InvitationsController < Devise::InvitationsController
   before_action :resource_from_invitation_token, only: [:edit, :update]
 
   def create
-    # TODO: only users with admin roles can invite users
-    User.invite!(invite_params, current_api_v1_user)
-    render json: { success: ['User created.'] }, status: :created
+    if current_api_v1_user.roles.include?('admin')
+      User.invite!(invite_params, current_api_v1_user)
+      # TODO: Notify admin about his successful creation of staff user(admin/support)
+      render json: { success: ['User Created Successfully.'] }, status: :created
+    else
+        render json: {
+          error: { code: 'Forbidden', message: 'Unauthorized to complete that action.' }
+        }, status: 403
+    end
   end
 
   def edit
@@ -17,10 +23,10 @@ class Api::V1::InvitationsController < Devise::InvitationsController
   def update
     user = User.accept_invitation!(accept_invitation_params)
     if @user.errors.empty?
-      render json: { success: ['User updated.'] }, status: :accepted
+      # TODO: Notify staff user with welcome notif in-app and send welcome email with login link
+      render json: { success: ['User  Invitation Accepted.'] }, status: :accepted
     else
-      render json: { errors: user.errors.full_messages },
-              status: :unprocessable_entity
+      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
