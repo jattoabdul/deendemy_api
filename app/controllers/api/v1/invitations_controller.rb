@@ -21,7 +21,7 @@ class Api::V1::InvitationsController < Devise::InvitationsController
   def update
     user = User.accept_invitation!(accept_invitation_params)
     if @user.errors.empty?
-      UserMailer.welcome_staff_email(id.to_s).deliver_later
+      UserMailer.welcome_staff_email(@user.id.to_s).deliver_later
       Notification.create(recipient: @user, action: 'staff_registered', notifiable: @user, data: @user.as_json)
       render json: { success: ['User  Invitation Accepted.'] }, status: :accepted
     else
