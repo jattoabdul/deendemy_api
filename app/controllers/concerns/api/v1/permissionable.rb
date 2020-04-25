@@ -32,8 +32,8 @@ module Api::V1::Permissionable
         learner: [:index, :create ]
       },
       accounts: {
-        admin: [ :edit, :create, :update ],
-        support: [ :edit, :update ],
+        admin: [ :index, :assign_roles, :unassign_roles ],
+        support: [ :index ],
         tutor: [],
         learner: []
       }
