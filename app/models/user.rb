@@ -118,9 +118,8 @@ class User
 
   def after_confirmation
     if confirmed_at_previous_change.first.nil?
-      UserMailer.welcome_email(id.to_s).deliver_later if role_is?('learner')
-      # UserMailer.welcome_tutor_email(id.to_s).deliver_later if role_is?('tutor')
-      # UserMailer.welcome_staff_email(id.to_s).deliver_later if role_is?('support') || role_is?('admin')
+      UserMailer.welcome_tutor_email(id.to_s).deliver_later if role_is?('tutor')
+      UserMailer.welcome_email(id.to_s).deliver_later if role_is?('learner') && !role_is?('tutor')
       Notification.create(recipient: self, action: 'user_registered', notifiable: self, data: serialize)
     end
   end

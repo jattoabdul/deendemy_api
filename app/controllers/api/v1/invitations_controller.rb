@@ -6,7 +6,6 @@ class Api::V1::InvitationsController < Devise::InvitationsController
   def create
     if current_api_v1_user.roles.include?('admin')
       User.invite!(invite_params, current_api_v1_user)
-      # TODO: Notify admin about his successful creation of staff user(admin/support)
       render json: { success: ['User Created Successfully.'] }, status: :created
     else
         render json: {
@@ -16,14 +15,14 @@ class Api::V1::InvitationsController < Devise::InvitationsController
   end
 
   def edit
-    # TODO: set client_url and pass as => #{client_api_url}
-    redirect_to "https://jatto.tech?invitation_token=#{params[:invitation_token]}"
+    redirect_to "#{ENV.fetch('FRONTEND_URL', 'http://localhost:3000')}?invitation_token=#{params[:invitation_token]}"
   end
 
   def update
     user = User.accept_invitation!(accept_invitation_params)
     if @user.errors.empty?
-      # TODO: Notify staff user with welcome notif in-app and send welcome email with login link
+      UserMailer.welcome_staff_email(id.to_s).deliver_later
+      Notification.create(recipient: @user, action: 'staff_registered', notifiable: @user, data: @user.as_json)
       render json: { success: ['User  Invitation Accepted.'] }, status: :accepted
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity

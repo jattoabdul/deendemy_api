@@ -1,0 +1,21 @@
+<% if @user.roles.include?('support') %>
+<h1>Welcome to <%= @app_name %>!, <%= @user.first_name %></h1>
+<p>
+  You have successfully signed up to deendemy.com as a support staff,
+  your user ID is: <%= @user.email %>.<br>
+</p>
+<p>
+  To login to the site, just follow this link: <%= @url %>.
+</p>
+<p>Thanks for joining and have a great day!</p>
+<% else %>
+<h1>Welcome to <%= @app_name %>!, <%= @user.first_name %></h1>
+<p>
+  You have successfully signed up to deendemy.com as an admin staff,
+  your user ID is: <%= @user.email %>.<br>
+</p>
+<p>
+  To login to the site, just follow this link: <%= @url %>.
+</p>
+<p>Thanks for joining and have a great day!</p>
+<% end %>
