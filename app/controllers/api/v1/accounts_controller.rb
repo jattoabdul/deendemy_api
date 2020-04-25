@@ -36,13 +36,13 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
     filter = params[:filter] || nil # filters for read/unread
 
     @users = if filter == 'staff'
-    User.staff
+      User.staff
     elsif filter == 'tutor'
-    User.tutors
+      User.tutors
     elsif filter == 'learner'
-    User.learners
+      User.learners
     else
-    User.all
+      User.all
     end
 
     render json: @users
