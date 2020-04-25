@@ -21,6 +21,8 @@ class ApplicationController < ActionController::API
 
   def configure_permitted_parameters
     signup_attr = [:email, :password, :password_confirmation, :first_name, :last_name, :country, :zip, :state, :city, :street, roles: %i()]
+    update_acct_attr = [:password, :password_confirmation, :first_name, :last_name, :country, :zip, :state, :city, :street]
     devise_parameter_sanitizer.permit(:sign_up, keys: signup_attr)
+    devise_parameter_sanitizer.permit(:account_update, keys: update_acct_attr)
   end
 end
