@@ -36,6 +36,12 @@ module Api::V1::Permissionable
         support: [ :index ],
         tutor: [],
         learner: []
+      },
+      courses: {
+        admin: [ :index ],
+        support: [ :index ],
+        tutor: [ :index ],
+        learner: [ :index ]
       }
     }
   end
