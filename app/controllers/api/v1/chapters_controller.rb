@@ -46,6 +46,6 @@ class Api::V1::ChaptersController < Api::V1::ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def chapter_params
-      params.require(:chapter).permit(:user_id, :title, :description, :public_url, :message_id, :is_deleted)
+      params.require(:chapter).permit(:course_id, :title, :objective, :reference, :is_last)
     end
 end
