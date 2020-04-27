@@ -42,8 +42,11 @@ Rails.application.routes.draw do
           end
           resources :medias, only: [:index, :create, :update, :show, :destroy]
           resources :courses, only: [:index, :create, :update, :show, :destroy] do
-            resources :chapters, only: [:index, :create, :update, :show, :destroy]
+            resources :chapters, only: [:index, :create, :update, :show, :destroy] do
+              resources :lessons, only: [:index, :create, :update, :show, :destroy] 
+            end
           end
+          resources :lessons, only: [:create, :update, :show, :destroy]
 
           root to: 'home#index', via: :all
         end
