@@ -36,6 +36,7 @@ class Course
   # Hooks/Callbacks
   after_create do
     Event.create(name: 'course.created', eventable: self, data: serialize)
-    Notification.create(recipient: tutor, actor: tutor, action: 'course_created', notifiable: self, data: serialize)
+    # TODO: loop through list of admins including current user and for each user_id
+    # Notification.create(recipient: user_id, actor: tutor, action: 'course_created', notifiable: self, data: serialize)
   end
 end
