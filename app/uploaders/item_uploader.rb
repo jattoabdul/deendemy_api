@@ -5,7 +5,7 @@ class ItemUploader < CarrierWave::Uploader::Base
   # storage :file
   storage :fog
 
-  # File type based processors
+  # TODO: File type based processors
   # process :process_image, if: :image?
   # process :process_pdf, if: :pdf?
 
