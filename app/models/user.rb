@@ -77,8 +77,8 @@ class User
   has_many :conversations, foreign_key: :sender_id
   has_many :notifications, foreign_key: :recipient_id
   has_many :medias
-  # has_many :courses, foreign_key: :tutor_id
-  # has_many :courses, foreign_key: :learner_id
+  has_many :courses, foreign_key: :tutor_id, dependent: :restrict
+  # has_and_belongs_to_many :courses, class_name: 'Course', foreign_key: :course_ids # maybe through enrollments
 
   # Hooks/Callbacks
   before_validation do
