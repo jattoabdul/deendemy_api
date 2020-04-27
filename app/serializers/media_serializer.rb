@@ -1,3 +1,11 @@
 class MediaSerializer < ActiveModel::Serializer
-  attributes :id, :userId, :type, :title, :description, :public_url, :message_id, :is_deleted
+  attributes :id, :type, :title, :description, :is_deleted
+
+  belongs_to :user, serializer: UserSerializer
+  belongs_to :message
+
+  # TODO: Add more attributes from aws to serializer
+  attribute :item do
+    object.item.url
+  end
 end

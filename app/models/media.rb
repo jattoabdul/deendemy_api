@@ -1,20 +1,24 @@
 class Media
   include Mongoid::Document
+  include Mongoid::Timestamps
+  
   include Eventable
   include Notifiable
   include Serializable
-  include Referenceable
+  # include Referenceable
   extend Enumerize
+
+  mount_uploader :item, ItemUploader
 
   # Fields
   enumerize :type, in: [:image, :pdf, :video, :ppt, :audio, :text], predicates:  true
   field :title, type: String
-  field :reference, type: String
+  # field :reference, type: String
   field :description, type: String
-  field :public_url, type: String
-  field :is_deleted, type: Mongoid::Boolean
-  # field :user_id, type: BSON::ObjectId
-  # field :message_id, type: BSON::ObjectId
+  field :item, type: String
+  field :is_deleted, type: Mongoid::Boolean, default: false
+  field :user_id, type: BSON::ObjectId
+  field :message_id, type: BSON::ObjectId
 
   # Associations
   belongs_to :user, required: false, optional: true
@@ -22,7 +26,7 @@ class Media
 
   # Validations
   validates_presence_of :title
-  validates :public_url, presence: true, uniqueness: true
+  # validates :item, presence: true, uniqueness: true
 
   # Hooks/Callbacks
   after_create do

@@ -37,6 +37,12 @@ module Api::V1::Permissionable
         tutor: [],
         learner: []
       },
+      medias: {
+        admin: [ :index, :my_media, :show, :create, :update, :destroy ],
+        support: [ :index, :my_media, :show, :create, :update, :destroy ],
+        tutor: [ :my_media, :show, :create, :update, :destroy ],
+        learner: [ :my_media, :show, :create, :update, :destroy ]
+      },
       courses: {
         admin: [ :index ],
         support: [ :index ],

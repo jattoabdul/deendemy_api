@@ -19,6 +19,11 @@ Rails.application.routes.draw do
               post '/roles/assign' => :assign_roles # accounts/{user_id}/roles/assign
               post '/roles/unassign' => :unassign_roles # accounts/{user_id}/roles/unassign
             end
+            resources :medias, only: [] do
+              collection do
+                get '/' => :my_media
+              end
+            end
           end
           resources :events, only: [:index, :show]
           resources :categories, only: [:index, :show, :create, :update, :destroy]
