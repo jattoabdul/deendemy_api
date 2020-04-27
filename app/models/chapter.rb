@@ -15,7 +15,7 @@ class Chapter
 
   # Associations
   belongs_to :course, required: true
-  # has_many :lessons
+  has_many :lessons
 
   # Validations
   validates_presence_of :title, :reference, :course_id
