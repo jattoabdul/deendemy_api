@@ -28,10 +28,10 @@ class Course
   # Associations
   has_and_belongs_to_many :categories, autosave: true
   belongs_to :tutor, class_name: 'User', foreign_key: 'tutor_id'
-  belongs_to :label, class_name: 'Media', foreign_key: 'label_id' 
-  # belongs_to :introduction, class_name: 'Lesson', foreign_key: 'introduction_id' 
+  belongs_to :label, class_name: 'Media', foreign_key: 'label_id'
+  has_many :chapters
+  # has_one/belongs_to :introduction, class_name: 'Lesson', foreign_key: 'introduction_id' 
   # has_and_belongs_to_many :learners, class_name: 'User', foreign_key: 'learner_ids' # maybe through enrollments
-  # has_one :introduction, class_name: 'Lesson', foreign_key: 'introduction_id' 
 
   # Hooks/Callbacks
   after_create do
