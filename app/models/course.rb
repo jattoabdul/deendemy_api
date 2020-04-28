@@ -21,8 +21,8 @@ class Course
   field :configs, type: Array, default: []
 
   # Validations
-  # validates_presence_of :body, :conversation_id, :sender_id, :receiver_id
-  # validates :reference, presence: true, uniqueness: true
+  validates_presence_of :title, :tutor_id
+  # validates :price, presence: true unless type == free
 
   # Associations
   has_and_belongs_to_many :categories, autosave: true

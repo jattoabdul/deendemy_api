@@ -14,9 +14,8 @@ class Lesson
   field :description, type: String
   # store assesment_id for all other lesson types except lecture
   field :assessment_id, type: BSON::ObjectId
-  # content and additionalresource are media objects
-  field :content, type: BSON::ObjectId
-  field :additional_resource, type: BSON::ObjectId
+  field :content_id, type: BSON::ObjectId
+  field :additional_resource_id, type: BSON::ObjectId
   enumerize :status, in: [:draft, :published], default: :draft, predicates: true
   field :prerequisite, type: Mongoid::Boolean
   field :downloadable, type: Mongoid::Boolean
@@ -26,10 +25,13 @@ class Lesson
 
   # Associations
   belongs_to :chapter, class_name: 'Chapter', foreign_key: 'chapter_id', required: false, optional: true
-  # associate with belongs_to: assessment
+  # belongs_to: assessment unless type == lecture
+  # belongs_to: content, class_name: 'Media'
+  # belongs_to: additional_resource, class_name: 'Media'
 
   # Validations
-  validates_presence_of :title, :reference,
+  validates_presence_of :title
+  validates :reference, presence: true, uniqueness: true
 
   # Hooks/Callbacks
   after_create do
