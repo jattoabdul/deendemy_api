@@ -1,5 +1,6 @@
 class Course
   include Mongoid::Document
+  include Mongoid::Timestamps
   include Eventable
   include Notifiable
   include Serializable
