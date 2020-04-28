@@ -23,12 +23,14 @@ class Course
 
   # Validations
   validates_presence_of :title
-  # validates :price, presence: true unless type == free
+  validates :price, numericality: true
+  # validates :price, presence: true, numericality: true, unless: -> { type == 'free' }
+
 
   # Associations
   has_and_belongs_to_many :categories, autosave: true
   belongs_to :tutor, class_name: 'User', foreign_key: 'tutor_id'
-  belongs_to :label, class_name: 'Media', foreign_key: 'label_id'
+  belongs_to :label, class_name: 'Media', foreign_key: 'label_id', required: false, optional: true
   has_many :chapters
   # has_many :lessons, through: :chapters
   belongs_to :introduction, class_name: 'Lesson', foreign_key: 'introduction_id', required: false, optional: true
