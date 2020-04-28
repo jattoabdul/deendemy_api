@@ -22,7 +22,7 @@ class Course
   field :configs, type: Array, default: []
 
   # Validations
-  validates_presence_of :title, :tutor_id
+  validates_presence_of :title
   # validates :price, presence: true unless type == free
 
   # Associations
@@ -30,7 +30,7 @@ class Course
   belongs_to :tutor, class_name: 'User', foreign_key: 'tutor_id'
   belongs_to :label, class_name: 'Media', foreign_key: 'label_id'
   has_many :chapters
-  has_many :lessons, through: :chapters
+  # has_many :lessons, through: :chapters
   belongs_to :introduction, class_name: 'Lesson', foreign_key: 'introduction_id', required: false, optional: true
   # has_many :enrollments
   # has_many :learners, class_name: 'User', through :enrollments

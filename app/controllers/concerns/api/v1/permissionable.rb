@@ -44,10 +44,10 @@ module Api::V1::Permissionable
         learner: [ :my_media, :show, :create, :update, :destroy ]
       },
       courses: {
-        admin: [ :index ],
-        support: [ :index ],
-        tutor: [ :index ],
-        learner: [ :index ]
+        admin: [ :index, :show, :create, :update, :destroy ],
+        support: [ :index, :show, :update, :destroy  ],
+        tutor: [ :index, :show, :create, :update, :destroy ],
+        learner: [ :index, :show ]
       }
     }
   end
