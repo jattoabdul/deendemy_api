@@ -1,9 +1,9 @@
 class Api::V1::CoursesController < Api::V1::ApplicationController
-  before_action :set_course, only: [:show, :update, :destroy]
+  before_action :set_course, only: [:show, :update, :approve, :destroy]
 
   # GET /courses
   def index
-    @courses = Course.all
+    @courses = Course.includes([:label, :introduction, :tutor]).all
 
     render json: @courses
   end
@@ -15,13 +15,18 @@ class Api::V1::CoursesController < Api::V1::ApplicationController
 
   # POST /courses
   def create
-    @course = Course.new(course_params)
+    @course = Course.new(course_params.merge(tutor_id: current_api_v1_user.id))
 
     if @course.save
-      render json: @course, status: :created, location: @course
+      render json: @course, status: :created
     else
-      render json: @course.errors, status: :unprocessable_entity
+      render json: ErrorSerializer.serialize(@course.errors), status: :unprocessable_entity
     end
+  end
+
+  # POST /courses/1/approve
+  def approve
+    # approve course
   end
 
   # PATCH/PUT /courses/1
@@ -29,7 +34,7 @@ class Api::V1::CoursesController < Api::V1::ApplicationController
     if @course.update(course_params)
       render json: @course
     else
-      render json: @course.errors, status: :unprocessable_entity
+      render json: ErrorSerializer.serialize(@course.errors), status: :unprocessable_entity
     end
   end
 
@@ -46,6 +51,6 @@ class Api::V1::CoursesController < Api::V1::ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def course_params
-      params.require(:course).permit(:reference, :title, :subtitle, :tutor_id, :categories, :label, :introduction, :curriculum, :type, :price, :status, :copy_text, :seo, :language, :level, :configs)
+      params.require(:course).permit(:title, :subtitle, :label_id, :introduction_id, :type, :price, :currency_iso, :status, :copy_text, :language, :level, seo: [:title, :description, tags: []], configs: [:name, :value], category_ids: [])
     end
 end
