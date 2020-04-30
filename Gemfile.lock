@@ -284,6 +284,15 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.0)
     mock_redis (0.22.0)
+    monetize (1.9.4)
+      money (~> 6.12)
+    money (6.13.7)
+      i18n (>= 0.6.4, <= 2)
+    money-rails (1.13.3)
+      activesupport (>= 3.0)
+      monetize (~> 1.9.0)
+      money (~> 6.13.2)
+      railties (>= 3.0)
     mongo (2.11.4)
       bson (>= 4.4.2, < 5.0.0)
     mongoid (7.0.6)
@@ -580,6 +589,7 @@ DEPENDENCIES
   mailcatcher
   mini_magick
   mock_redis
+  money-rails (~> 1.12)
   mongoid (~> 7.0.5)
   mongoid-locker
   mongoid-rspec
