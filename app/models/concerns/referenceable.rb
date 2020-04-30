@@ -10,7 +10,7 @@ module Referenceable
     self.reference = loop do
       # ref = SecureRandom.uuid
       ref = SecureRandom.hex(3)
-      break ref unless self.class.exists?(reference: ref)
+      break ref unless self.class.where(reference: ref).exists?
     end
   end
 end
