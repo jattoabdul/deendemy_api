@@ -7,11 +7,11 @@ class Api::V1::NotificationsController < Api::V1::ApplicationController
     filter = params[:filter] || nil # filters for read/unread
 
     @notifications = if filter == 'read'
-      Notification.read.for_user(current_api_v1_user)
+      Notification.read.for_user(current_api_v1_user).includes([:recipient, :actor])
     elsif filter == 'unread'
-      Notification.unread.for_user(current_api_v1_user)
+      Notification.unread.for_user(current_api_v1_user).includes([:recipient, :actor])
     else
-      Notification.for_user(current_api_v1_user)
+      Notification.includes([:recipient, :actor]).for_user(current_api_v1_user)
     end
 
     render json: @notifications
