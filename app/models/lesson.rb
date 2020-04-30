@@ -16,11 +16,11 @@ class Lesson
   field :assessment_id, type: BSON::ObjectId
   field :content_id, type: BSON::ObjectId
   field :additional_resource_id, type: BSON::ObjectId
-  enumerize :status, in: [:draft, :published], default: :draft, predicates: true
+  enumerize :status, in: [:draft, :published], default: :published, predicates: true
   field :prerequisite, type: Mongoid::Boolean
   field :downloadable, type: Mongoid::Boolean
   field :can_discuss, type: Mongoid::Boolean
-  field :is_last, type: Mongoid::Boolean
+  field :position, type: Integer
   field :chapter_id, type: BSON::ObjectId
 
   # Associations
