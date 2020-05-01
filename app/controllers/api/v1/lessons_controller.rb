@@ -1,6 +1,7 @@
 class Api::V1::LessonsController < Api::V1::ApplicationController
   before_action :set_lesson, only: [:show, :update, :destroy]
   before_action :set_chapter, only: [:index, :create, :show, :update, :update_positions, :destroy]
+  before_action :set_course, only: [:introduction, :introduction_index]
 
   # GET courses/:course_id/chapters/:chapter_id/lessons
   def index
@@ -30,6 +31,30 @@ class Api::V1::LessonsController < Api::V1::ApplicationController
     else
       render json: ErrorSerializer.serialize(@lesson.errors), status: :unprocessable_entity
     end
+  end
+
+  # POST courses/:course_id/lessons/introduction
+  def introduction
+    @lesson = Lesson.new(lesson_params)
+
+    if @lesson.save
+      @course.introduction = @lesson
+      if @course.save
+        render json: @lesson, status: :created
+      else
+        render json: ErrorSerializer.serialize(@course.errors), status: :unprocessable_entity
+      end
+    else
+      render json: ErrorSerializer.serialize(@lesson.errors), status: :unprocessable_entity
+    end
+  end
+
+  # GET courses/:course_id/lessons/introduction
+  def introduction_index
+    # @lesson = Lesson.find(@course.introduction_id)
+    @lesson = @course.introduction
+
+    render json: @lesson
   end
 
   # PATCH/PUT courses/:course_id/chapters/:chapter_id/lessons/1
@@ -73,6 +98,10 @@ class Api::V1::LessonsController < Api::V1::ApplicationController
 
     def set_chapter
       @chapter = Chapter.where(id: params[:chapter_id], course_id: params[:course_id]).first
+    end
+
+    def set_course
+      @course = Course.includes([:introduction]).find(params[:course_id])
     end
 
     def course_owner_or_admin?

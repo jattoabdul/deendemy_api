@@ -42,6 +42,12 @@ Rails.application.routes.draw do
           end
           resources :medias, only: [:index, :create, :update, :show, :destroy]
           resources :courses, only: [:index, :create, :update, :show, :destroy] do
+            resources :lessons, only: [] do
+              collection do
+                post :introduction
+                get  '/introduction' => :introduction_index
+              end
+            end
             resources :chapters, only: [:index, :create, :update, :show, :destroy] do
               collection do
                 post '/positions' => :update_positions
