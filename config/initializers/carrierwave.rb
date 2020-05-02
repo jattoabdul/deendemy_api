@@ -8,6 +8,9 @@ CarrierWave.configure do |config|
     region: ENV['AWS_REGION']
   }
 
+  # config.fog_public     = false # optional, default to true, which means no expiry on urls
+  config.fog_authenticated_url_expiration = 600
+
   case Rails.env
     when 'production'
       config.fog_directory = ENV['AWS_BUCKET']
