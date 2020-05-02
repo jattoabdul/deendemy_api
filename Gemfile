@@ -55,6 +55,8 @@ gem 'rest-client', '~> 2.0'
 gem 'aws-sdk-s3', '~> 1.0', require: false
 gem 'carrierwave', '~> 2.0'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'carrierwave_direct'
+# gem 'carrierwave_backgrounder', '~> '
 gem 'mini_magick'
 gem 'fog-aws'
 gem 'money-rails', '~>1.12'

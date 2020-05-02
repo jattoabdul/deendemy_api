@@ -133,6 +133,9 @@ GEM
       carrierwave (>= 0.8, < 3)
       mongoid (>= 3.0, < 8.0)
       mongoid-grid_fs (>= 1.3, < 3.0)
+    carrierwave_direct (2.1.0)
+      carrierwave (>= 1.0.0)
+      fog-aws
     case_transform (0.2)
       activesupport
     coderay (1.1.2)
@@ -568,6 +571,7 @@ DEPENDENCIES
   byebug
   carrierwave (~> 2.0)
   carrierwave-mongoid
+  carrierwave_direct
   combine_pdf (~> 1.0, >= 1.0.16)
   concurrent-ruby (~> 1.1)
   countries (~> 3.0)
