@@ -32,4 +32,12 @@ class Media
   end
 
   # Methods
+  # def save_and_process_item(options = {})
+  #   if options[:now]
+  #     self.item = item.url
+  #     save
+  #   else
+  #     SaveImageToS3Job.new.perform(attributes)
+  #   end
+  # end
 end
