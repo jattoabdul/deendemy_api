@@ -25,9 +25,9 @@ class Lesson
 
   # Associations
   belongs_to :chapter, class_name: 'Chapter', foreign_key: 'chapter_id', required: false, optional: true
+  belongs_to :content, class_name: 'Media', foreign_key: 'content_id', required: false, optional: true
+  belongs_to :additional_resource, class_name: 'Media', foreign_key: 'additional_resource_id', required: false, optional: true
   # belongs_to: assessment unless type == lecture
-  # belongs_to: content, class_name: 'Media'
-  # belongs_to: additional_resource, class_name: 'Media'
 
   # Validations
   validates_presence_of :title
