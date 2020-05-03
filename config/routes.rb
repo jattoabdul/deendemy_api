@@ -46,6 +46,7 @@ Rails.application.routes.draw do
               collection do
                 post :introduction
                 get  '/introduction' => :introduction_index
+                put  '/introduction' => :update_introduction
               end
             end
             resources :chapters, only: [:index, :create, :update, :show, :destroy] do
@@ -55,6 +56,8 @@ Rails.application.routes.draw do
               resources :lessons, only: [:index, :create, :update, :show, :destroy] do
                 collection do
                   post '/positions' => :update_positions
+                  post  '/assessments' => :create_lesson_assessment
+                  put  '/assessments/:assessment_id' => :update_lesson_assessment
                 end
               end
             end

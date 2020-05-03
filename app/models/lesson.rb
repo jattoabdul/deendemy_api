@@ -12,8 +12,6 @@ class Lesson
   enumerize :type, in: [:lecture, :quiz, :survey], default: :lecture, predicates:  true
   field :title, type: String
   field :description, type: String
-  # store assesment_id for all other lesson types except lecture
-  field :assessment_id, type: BSON::ObjectId
   field :content_id, type: BSON::ObjectId
   field :additional_resource_id, type: BSON::ObjectId
   enumerize :status, in: [:draft, :published], default: :published, predicates: true
@@ -27,7 +25,6 @@ class Lesson
   belongs_to :chapter, class_name: 'Chapter', foreign_key: 'chapter_id', required: false, optional: true
   belongs_to :content, class_name: 'Media', foreign_key: 'content_id', required: false, optional: true
   belongs_to :additional_resource, class_name: 'Media', foreign_key: 'additional_resource_id', required: false, optional: true
-  # belongs_to: assessment unless type == lecture
 
   # Validations
   validates_presence_of :title
