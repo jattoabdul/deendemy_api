@@ -41,6 +41,28 @@ Rails.application.routes.draw do
             end
           end
           resources :medias, only: [:index, :create, :update, :show, :destroy]
+          resources :courses, only: [:index, :create, :update, :show, :destroy] do
+            resources :lessons, only: [] do
+              collection do
+                post :introduction
+                get  '/introduction' => :introduction_index
+                put  '/introduction' => :update_introduction
+              end
+            end
+            resources :chapters, only: [:index, :create, :update, :show, :destroy] do
+              collection do
+                post '/positions' => :update_positions
+              end
+              resources :lessons, only: [:index, :create, :update, :show, :destroy] do
+                collection do
+                  post '/positions' => :update_positions
+                  post  '/assessments' => :create_lesson_assessment
+                  put  '/assessments/:assessment_id' => :update_lesson_assessment
+                end
+              end
+            end
+          end
+          resources :lessons, only: [:create, :update, :show, :destroy]
 
           root to: 'home#index', via: :all
         end

@@ -5,7 +5,6 @@ class Media
   include Eventable
   include Notifiable
   include Serializable
-  # include Referenceable
   extend Enumerize
 
   mount_uploader :item, ItemUploader
@@ -13,7 +12,6 @@ class Media
   # Fields
   enumerize :type, in: [:image, :pdf, :video, :ppt, :audio, :text], predicates:  true
   field :title, type: String
-  # field :reference, type: String
   field :description, type: String
   field :item, type: String
   field :is_deleted, type: Mongoid::Boolean, default: false
@@ -34,4 +32,12 @@ class Media
   end
 
   # Methods
+  # def save_and_process_item(options = {})
+  #   if options[:now]
+  #     self.item = item.url
+  #     save
+  #   else
+  #     SaveImageToS3Job.new.perform(attributes)
+  #   end
+  # end
 end

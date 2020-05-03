@@ -133,6 +133,9 @@ GEM
       carrierwave (>= 0.8, < 3)
       mongoid (>= 3.0, < 8.0)
       mongoid-grid_fs (>= 1.3, < 3.0)
+    carrierwave_direct (2.1.0)
+      carrierwave (>= 1.0.0)
+      fog-aws
     case_transform (0.2)
       activesupport
     coderay (1.1.2)
@@ -284,6 +287,15 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.0)
     mock_redis (0.22.0)
+    monetize (1.9.4)
+      money (~> 6.12)
+    money (6.13.7)
+      i18n (>= 0.6.4, <= 2)
+    money-rails (1.13.3)
+      activesupport (>= 3.0)
+      monetize (~> 1.9.0)
+      money (~> 6.13.2)
+      railties (>= 3.0)
     mongo (2.11.4)
       bson (>= 4.4.2, < 5.0.0)
     mongoid (7.0.6)
@@ -559,6 +571,7 @@ DEPENDENCIES
   byebug
   carrierwave (~> 2.0)
   carrierwave-mongoid
+  carrierwave_direct
   combine_pdf (~> 1.0, >= 1.0.16)
   concurrent-ruby (~> 1.1)
   countries (~> 3.0)
@@ -580,6 +593,7 @@ DEPENDENCIES
   mailcatcher
   mini_magick
   mock_redis
+  money-rails (~> 1.12)
   mongoid (~> 7.0.5)
   mongoid-locker
   mongoid-rspec

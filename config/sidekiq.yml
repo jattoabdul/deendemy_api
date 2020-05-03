@@ -1,5 +1,4 @@
 <% DISABLED_DEV = !['development', nil].include?(ENV.fetch('RAILS_ENV', nil)) %>
-
 ---
 :timeout: 8
 
@@ -11,13 +10,14 @@ production:
   :concurrency: <%= ENV.fetch('RAILS_MAX_THREADS', 5) %>
 
 :queues:
-  - ['mailers', 5]
-  - ['important', 4]
-  - ['events', 3]
-  - ['messages', 2]
-  - ['default', 2]
-  - ['analytics', 1]
-  - ['searchkick', 1]
+  - ["mailers", 5]
+  - ["important", 4]
+  - ["events", 3]
+  - ["messages", 2]
+  - ["default", 2]
+  - ["analytics", 1]
+  - ["searchkick", 1]
+  # - ["uploader", 2]
 
 :enabled: true
 
@@ -27,11 +27,10 @@ production:
 :schedule:
   # --- SAMPLE WORKER JOB ---
   job_name:
-    description: 'Job Description'
-    cron: '0 * * * *' # Runs every hour starting at *:00
-    class: 'Tasks::SampleWorkerJob'
-    queue: 'default'
-
+    description: "Job Description"
+    cron: "0 * * * *" # Runs every hour starting at *:00
+    class: "Tasks::SampleWorkerJob"
+    queue: "default"
   # --- EMAIL REPORTS --
   # sample_report:
   #   description: 'Monthly sample email report'
@@ -39,7 +38,6 @@ production:
   #   class: 'Tasks::SampleMailerJob'
   #   queue: mailers
   #   args: ['monthly_samples']
-
   # --- SEARCHKICK INDEX JOB --
   # sample_model_batch_reindex:
   #   description: 'Sample Model SearchKick Reindexing'

@@ -76,6 +76,11 @@ class User
   # Associations
   has_many :conversations, foreign_key: :sender_id
   has_many :notifications, foreign_key: :recipient_id
+  has_many :medias
+  has_many :courses, foreign_key: :tutor_id, dependent: :restrict_with_exception
+  # has_many :enrollments
+  # has_many :courses, class_name: 'Course', through :enrollments
+  # belongs_to :learner, class_name: 'User'  # to be added on enrollment
 
   # Hooks/Callbacks
   before_validation do

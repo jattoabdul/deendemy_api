@@ -4,6 +4,9 @@ class ItemUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   # storage :file
   storage :fog
+  # include CarrierWaveDirect::Uploader
+  # include ActiveModel::Conversion
+  # extend ActiveModel::Naming
 
   # TODO: File type based processors
   # process :process_image, if: :image?

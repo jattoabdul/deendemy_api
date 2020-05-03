@@ -8,9 +8,9 @@ module Referenceable
   # Sets a short, unique reference ID
   def set_reference
     self.reference = loop do
-      # ref = SecureRandom.hex(3)
-      ref = SecureRandom.uuid
-      break ref unless self.class.exists?(reference: ref)
+      # ref = SecureRandom.uuid
+      ref = SecureRandom.hex(3)
+      break ref unless self.class.where(reference: ref).exists?
     end
   end
 end

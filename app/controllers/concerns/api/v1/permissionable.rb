@@ -42,6 +42,24 @@ module Api::V1::Permissionable
         support: [ :index, :my_media, :show, :create, :update, :destroy ],
         tutor: [ :my_media, :show, :create, :update, :destroy ],
         learner: [ :my_media, :show, :create, :update, :destroy ]
+      },
+      courses: {
+        admin: [ :index, :show, :approve, :update, :destroy ],
+        support: [ :index, :show, :update, :destroy  ],
+        tutor: [ :index, :show, :create, :update, :destroy ],
+        learner: [ :index, :show ]
+      },
+      chapters: {
+        admin: [ :index, :show, :update, :update_positions, :destroy ],
+        support: [ :index, :show ],
+        tutor: [ :index, :show, :create, :update, :update_positions, :destroy ],
+        learner: [ :index, :show ]
+      },
+      lessons: {
+        admin: [ :index, :show, :update, :update_positions, :introduction, :introduction_index, :update_introduction, :create_lesson_assessment, :update_lesson_assessment, :destroy ],
+        support: [ :index, :show, :introduction_index ],
+        tutor: [ :index, :show, :create, :update, :update_positions, :introduction, :introduction_index, :update_introduction, :create_lesson_assessment, :update_lesson_assessment, :destroy ],
+        learner: [ :index, :show, :introduction_index ]
       }
     }
   end

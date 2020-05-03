@@ -5,7 +5,7 @@ class Api::V1::MediasController < Api::V1::ApplicationController
   # GET /medias
   def index
     # TODO: check that user is admin
-    @medias = Media.all
+    @medias = Media.includes([:user, :message]).all
 
     render json: @medias
   end
@@ -27,6 +27,7 @@ class Api::V1::MediasController < Api::V1::ApplicationController
   def create
     @media = Media.new(media_params)
 
+    # if @media.save_and_process_item
     if @media.save
       render json: @media, status: :created
     else
