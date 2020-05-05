@@ -43,6 +43,7 @@ Rails.application.routes.draw do
           resources :medias, only: [:index, :create, :update, :show, :destroy]
           resources :courses, only: [:index, :create, :update, :show, :destroy] do
             resources :lessons, only: [] do
+              resources :lesson_discussions, only: [:index, :create, :update, :show, :destroy], path: '/discussions'
               collection do
                 post :introduction
                 get  '/introduction' => :introduction_index
@@ -62,7 +63,7 @@ Rails.application.routes.draw do
               end
             end
           end
-          resources :lessons, only: [:create, :update, :show, :destroy]
+          resources :lessons, only: [:create, :update, :show, :destroy] 
 
           root to: 'home#index', via: :all
         end

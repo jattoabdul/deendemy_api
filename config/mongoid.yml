@@ -9,6 +9,11 @@ development:
         # - 127.0.0.1:27017
       options:
         server_selection_timeout: 5
+        # user: 'test'
+        # password: 'test'
+        # auth_source: admin
+        # roles:
+        #   - 'dbOwner'
         # ssl: true
   options:
     app_name: DeendemyAPI
@@ -26,5 +31,10 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
+        # user: 'test'
+        # password: 'test'
+        # auth_source: admin
+        # roles:
+        #   - 'dbOwner'
   options:
     app_name: DeendemyTestAPI
