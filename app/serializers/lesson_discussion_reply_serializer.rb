@@ -1,5 +1,5 @@
 class LessonDiscussionReplySerializer < ActiveModel::Serializer
-  attributes :id, :body
+  attributes :id, :body, :is_deleted
 
   belongs_to :sender, serializer: UserSerializer
 

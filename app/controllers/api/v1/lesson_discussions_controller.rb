@@ -5,6 +5,7 @@ class Api::V1::LessonDiscussionsController < Api::V1::ApplicationController
 
   # GET courses/:course_id/lessons/:lesson_id/discussions
   def index
+    # TODO: User can't fetch discussions in a course if they are not enrolled in the course || an admin || course creator
     @lesson_discussions = LessonDiscussion.includes([:sender, :children, :lesson, :course]).where(course_id: @course.id, lesson_id: @lesson.id, parent_id: nil)
     # .order_by(created_at: :asc)
     # TODO: paginate and load first 10 discussions only
@@ -12,15 +13,9 @@ class Api::V1::LessonDiscussionsController < Api::V1::ApplicationController
     render json: @lesson_discussions
   end
 
-  # GET /lesson_discussions
-  def all_discussions
-    @lesson_discussions = LessonDiscussion.all
-
-    render json: @lesson_discussions
-  end
-
   # GET courses/:course_id/lessons/:lesson_id/discussions/1
   def show
+    # TODO: User can't view discussion in a course if they are not enrolled in the course || an admin || course creator
     render json: @lesson_discussion
   end
 
@@ -43,7 +38,8 @@ class Api::V1::LessonDiscussionsController < Api::V1::ApplicationController
 
   # PATCH/PUT courses/:course_id/lessons/:lesson_id/discussions/1
   def update
-    # bad_request_error('cannot update lesson for this course chapters') && return unless disucssion_owner_or_admin?
+    bad_request_error('cannot update this discussion for this lesson') && return unless discussion_owner_or_admin?
+
     if @lesson_discussion.update(lesson_discussion_params)
       render json: @lesson_discussion
     else
@@ -53,7 +49,19 @@ class Api::V1::LessonDiscussionsController < Api::V1::ApplicationController
 
   # DELETE courses/:course_id/lessons/:lesson_id/discussions/1
   def destroy
-    @lesson_discussion.destroy
+    bad_request_error('cannot delete this discussion for this lesson') && return unless discussion_owner_or_admin?
+  
+    if @lesson_discussion.parent_id.blank? && @lesson_discussion.children.present?
+      @lesson_discussion.update(is_deleted: true)
+    elsif @lesson_discussion.parent_id.blank? && @lesson_discussion.children.blank?
+      @lesson_discussion.destroy
+    else
+      parent_lesson_discussion = @lesson_discussion.parent
+      parent_lesson_discussion_children = parent_lesson_discussion.children
+      replies = parent_lesson_discussion_children.many?
+      @lesson_discussion.destroy
+      parent_lesson_discussion.destroy if !replies  && parent_lesson_discussion.is_deleted
+    end
   end
 
   private
@@ -67,6 +75,10 @@ class Api::V1::LessonDiscussionsController < Api::V1::ApplicationController
 
     def set_course
       @course = Course.includes([:introduction]).find(params[:course_id])
+    end
+
+    def discussion_owner_or_admin?
+      (@lesson_discussion.sender_id == current_api_v1_user.id) || (current_api_v1_user.roles.include?('admin') )
     end
 
     def lesson_discussion_params

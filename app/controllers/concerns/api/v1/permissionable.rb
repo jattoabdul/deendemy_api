@@ -60,6 +60,12 @@ module Api::V1::Permissionable
         support: [ :index, :show, :introduction_index ],
         tutor: [ :index, :show, :create, :update, :update_positions, :introduction, :introduction_index, :update_introduction, :create_lesson_assessment, :update_lesson_assessment, :destroy ],
         learner: [ :index, :show, :introduction_index ]
+      },
+      lesson_discussions: {
+        admin: [ :index, :show, :update, :create, :destroy ],
+        support: [ :index, :show, :update, :create, :destroy ],
+        tutor: [ :index, :show, :update, :create, :destroy ],
+        learner: [ :index, :show, :update, :create, :destroy ]
       }
     }
   end

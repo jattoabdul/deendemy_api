@@ -10,6 +10,7 @@ class LessonDiscussion
   field :lesson_id, type: BSON::ObjectId
   field :sender_id, type: BSON::ObjectId
   field :body, type: String
+  field :is_deleted, type: Mongoid::Boolean, default: false
   field :parent_id, type: BSON::ObjectId
   
   # Associations
