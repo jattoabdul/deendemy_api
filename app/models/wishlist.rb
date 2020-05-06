@@ -1,4 +1,4 @@
-class Cart
+class Wishlist
   include Mongoid::Document
   include Mongoid::Timestamps
   include Eventable
@@ -7,7 +7,6 @@ class Cart
 
   # Fields
   field :user_id, type: BSON::ObjectId
-  field :expires_on, type: Time
 
   # Associations
   belongs_to :user
@@ -32,23 +31,5 @@ class Cart
   def find_item(course_object)
     return nil if items.blank?
     self.items.find(course_object)
-  end
-
-  def sub_total
-    items.map(&:price).sum
-  end
-
-  def reset_expiry
-    self.expires_on = 60.days.from_now
-  end
-
-  def expired?
-    return (self.expires_on < Time.now) if self.expires_on
-    false
-  end
-
-  def seconds_left
-    return (self.expires_on - Time.now).round if self.expires_on
-    -1
   end
 end
