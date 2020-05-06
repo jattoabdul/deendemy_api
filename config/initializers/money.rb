@@ -7,15 +7,12 @@ MoneyRails.configure do |config|
 
   # Set default bank object
   # config.default_bank = EuCentralBank.new
-  # set default bank to instance of GoogleCurrency
-  # Money::Bank::GoogleCurrency.ttl_in_seconds = 86400
-  # config.default_bank = Money::Bank::GoogleCurrency.new
 
   # Add exchange rates to current money bank object.
   # (The conversion rate refers to one direction only)
   # Example:
-  # config.add_rate "USD", "CAD", 1.24515
-  # config.add_rate "CAD", "USD", 0.803115
+  # config.add_rate "USD", "NGN", 389.99
+  # config.add_rate "NGN", "USD", 0.0026
 
   # Register a custom currency
   # config.register_currency = {

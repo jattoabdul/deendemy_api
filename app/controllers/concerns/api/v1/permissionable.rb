@@ -66,6 +66,18 @@ module Api::V1::Permissionable
         support: [ :index, :show, :update, :create, :destroy ],
         tutor: [ :index, :show, :update, :create, :destroy ],
         learner: [ :index, :show, :update, :create, :destroy ]
+      },
+      carts: {
+        admin: [ :index, :show, :add_to_cart, :remove_from_cart ],
+        support: [ :show, :add_to_cart, :remove_from_cart ],
+        tutor: [ :show, :add_to_cart, :remove_from_cart ],
+        learner: [ :show, :add_to_cart, :remove_from_cart ]
+      },
+      wishlists: {
+        admin: [ :index, :show, :add_to_wishlist, :remove_from_wishlist ],
+        support: [ :show, :add_to_wishlist, :remove_from_wishlist ],
+        tutor: [ :show, :add_to_wishlist, :remove_from_wishlist ],
+        learner: [ :show, :add_to_cart, :remove_from_wishlist ]
       }
     }
   end

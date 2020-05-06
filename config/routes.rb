@@ -19,6 +19,18 @@ Rails.application.routes.draw do
               post '/roles/assign' => :assign_roles # accounts/{user_id}/roles/assign
               post '/roles/unassign' => :unassign_roles # accounts/{user_id}/roles/unassign
             end
+            resources :carts, only: [:index, :show] do
+              collection do
+                post '/add' => :add_to_cart # /account/:account_id/carts/add
+                post '/remove' => :remove_from_cart # /account/:account_id/carts/remove
+              end
+            end
+            resources :wishlists, only: [:index, :show] do
+              collection do
+                post '/add' => :add_to_wishlist # /account/:account_id/wishlists/add
+                post '/remove' => :remove_from_wishlist # /account/:account_id/wishlists/remove
+              end
+            end
             resources :medias, only: [] do
               collection do
                 get '/' => :my_media
