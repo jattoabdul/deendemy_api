@@ -54,12 +54,21 @@ Rails.application.routes.draw do
           end
           resources :medias, only: [:index, :create, :update, :show, :destroy]
           resources :courses, only: [:index, :create, :update, :show, :destroy] do
+            member do
+              post '/approve' => :approve
+              get '/ratings' => :fetch_course_reviews
+              get '/reviews' => :fetch_course_reviews
+            end
+            collection do
+              get '/tutor' => :fetch_tutor_courses
+              get '/all' => :fetch_all
+            end
             resources :lessons, only: [] do
               resources :lesson_discussions, only: [:index, :create, :update, :show, :destroy], path: '/discussions'
               collection do
                 post :introduction
-                get  '/introduction' => :introduction_index
-                put  '/introduction' => :update_introduction
+                get '/introduction' => :introduction_index
+                put '/introduction' => :update_introduction
               end
             end
             resources :chapters, only: [:index, :create, :update, :show, :destroy] do
@@ -74,8 +83,36 @@ Rails.application.routes.draw do
                 end
               end
             end
+            resources :enrollments, only: [] do
+              collection do
+                get '/' => :fetch_course_enrollments
+              end
+            end
           end
-          resources :lessons, only: [:create, :update, :show, :destroy] 
+          resources :lessons, only: [:create, :update, :show, :destroy]
+          resources :enrollments, only: [:index, :create, :show, :destroy] do
+            member do
+              match '/status' => :toggle_enrollment_status, via: [:put, :patch]
+              get '/progress' => :fetch_enrollment_lesson_progresses
+              post '/progress/reset' => :reset_enrollment_progress
+              post '/courses/:course_id/lessons/:lesson_id/start' => :start_enrollment_lesson
+              post '/courses/:course_id/lessons/:lesson_id/complete' => :complete_enrollment_lesson
+              post '/courses/:course_id/rate' => :rate_course
+            end
+            collection do
+              get '/learners/:learner_id' => :fetch_learner_enrollments
+              get '/courses/:course_id' => :fetch_course_enrollments
+            end
+          end
+          resources :payments, only: [:index] do
+            member do
+              get '/' => :fetch_single_payment
+            end
+            collection do
+              post '/charge' => :charge # /payments/charge
+              get '/learners/:learner_id' => :fetch_learner_payments
+            end
+          end
 
           root to: 'home#index', via: :all
         end

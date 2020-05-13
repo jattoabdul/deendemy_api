@@ -50,6 +50,7 @@ gem 'rest-client', '~> 2.0'
 # EXTERNAL SERVICES
 # gem 'mandrill-api', '~> 1.0'
 # gem 'stripe', '~> 3.3'
+gem 'paystackapi'
 # gem 'twilio-ruby', '~> 5.6.4'
 # gem 'aws-sdk-rails', '~> 3.0'
 gem 'aws-sdk-s3', '~> 1.0', require: false
