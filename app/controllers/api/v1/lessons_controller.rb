@@ -45,7 +45,7 @@ class Api::V1::LessonsController < Api::V1::ApplicationController
     end
   end
 
-  # TODO: PUT courses/:course_id/chapters/:chapter_id/lessons/assessments/:assessment_id
+  # PUT courses/:course_id/chapters/:chapter_id/lessons/assessments/:assessment_id
   def update_lesson_assessment
     bad_request_error('cannot update lesson for this course chapters') && return unless chapter_course_owner_or_admin?
     if @assessment.update(lesson_assessment_update_params)
@@ -76,6 +76,7 @@ class Api::V1::LessonsController < Api::V1::ApplicationController
     @introduction = @course.introduction
     bad_request_error('cannot update introduction for this course') && return unless course_owner_or_admin?
     bad_request_error('cannot find an introduction for this course') if @introduction.blank?
+
     if @introduction.update(lesson_update_params)
       render json: @introduction
     else

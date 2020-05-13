@@ -97,7 +97,8 @@ module ReportableExceptionHelper
     orig_method = instance_method(method)
     define_method(method) do |*args, &block|
       orig_method.bind(self).call(*args, &block)
-    rescue *@rxp_error, StandardError => e
+    # rescue *@rxp_error, StandardError => e
+    rescue *@rxp_error => e
       Raven.capture_exception(e)
       raise self.class::Error, e.message
     end

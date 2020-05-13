@@ -29,6 +29,11 @@ class Cart
     self.items.delete(course_object)
   end
 
+  def reset_cart
+    self.items.clear
+    self.expires_on = nil
+  end
+
   def find_item(course_object)
     return nil if items.blank?
     self.items.find(course_object)

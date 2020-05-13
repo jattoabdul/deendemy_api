@@ -80,8 +80,7 @@ class User
   has_many :courses, foreign_key: :tutor_id, dependent: :restrict_with_exception
   has_one :cart
   has_one :wishlist
-  # has_many :enrollments
-  # has_many :courses, class_name: 'Course', through :enrollments
+  has_many :enrollments, foreign_key: :learner_id
   # belongs_to :learner, class_name: 'User'  # to be added on enrollment
 
   # Hooks/Callbacks
@@ -131,5 +130,9 @@ class User
       UserMailer.welcome_email(id.to_s).deliver_later if role_is?('learner') && !role_is?('tutor')
       Notification.create(recipient: self, action: 'user_registered', notifiable: self, data: serialize)
     end
+  end
+
+  def courses
+    []
   end
 end
