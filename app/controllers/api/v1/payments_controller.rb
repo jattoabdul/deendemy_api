@@ -57,10 +57,11 @@ class Api::V1::PaymentsController < Api::V1::ApplicationController
       paystack_data = paystack.verify_transaction(reference)
 
       # Paystack Payment Verification Failure Check.
-      # bad_request_error('Paystack Payment Verification Failed. Please Contact Support') && return unless paystack_data['data']['status'] == 'success'
-      # Temporary
-      bad_request_error('Paystack Payment Verification Failed. Please Contact Support') && return unless paystack_data['data']['status'] == 'abandoned'
-      # End Temporary
+      # Temporarily added the or statement, take it out later after proper testing
+      unless paystack_data['data']['status'] == 'success' || paystack_data['data']['status'] == 'abandoned'
+        bad_request_error('Paystack Payment Verification Failed. Please Contact Support')
+        return
+      end
 
       payment_success = true
     else
