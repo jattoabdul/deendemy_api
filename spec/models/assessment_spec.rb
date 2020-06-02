@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe Lesson, type: :model do
+RSpec.describe Assessment, type: :model do
   describe 'Factories' do
     context 'Valid factory' do
-      subject { build(:lesson) }
+      subject { build(:assessment) }
       specify { should be_valid }
       specify { is_expected.to be_mongoid_document }
     end
     context 'Invalid factory' do
-      subject { build(:invalid_lesson) }
+      subject { build(:invalid_assessment) }
       specify { is_expected.not_to be_valid }
     end
   end

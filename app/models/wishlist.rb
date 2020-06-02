@@ -21,15 +21,15 @@ class Wishlist
 
   # Methods
   def add(course_object)
-    self.items << course_object
+    items << course_object
   end
 
   def remove(course_object)
-    self.items.delete(course_object)
+    items.delete(course_object)
   end
 
   def find_item(course_object)
     return nil if items.blank?
-    self.items.find(course_object)
+    items.find(course_object)
   end
 end

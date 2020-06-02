@@ -24,6 +24,7 @@ class Enrollment
   has_many :progresses
 
   # Validations
+  validates_presence_of :reference
 
   # Hooks/Callbacks
 

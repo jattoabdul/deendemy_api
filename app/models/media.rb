@@ -10,7 +10,7 @@ class Media
   mount_uploader :item, ItemUploader
 
   # Fields
-  enumerize :type, in: [:image, :pdf, :video, :ppt, :audio, :text], predicates:  true
+  enumerize :type, in: %i(image pdf video ppt audio text), predicates:  true
   field :title, type: String
   field :description, type: String
   field :item, type: String
@@ -30,14 +30,4 @@ class Media
   after_create do
     Event.create(name: 'media.created', eventable: self, data: serialize)
   end
-
-  # Methods
-  # def save_and_process_item(options = {})
-  #   if options[:now]
-  #     self.item = item.url
-  #     save
-  #   else
-  #     SaveImageToS3Job.new.perform(attributes)
-  #   end
-  # end
 end

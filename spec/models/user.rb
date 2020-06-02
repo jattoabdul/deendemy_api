@@ -1,22 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe Category, type: :model do
+RSpec.describe User, type: :model do
   describe 'Factories' do
     context 'Valid factory' do
-      subject { build(:category) }
+      subject { build(:user) }
       specify { should be_valid }
+      specify { is_expected.to be_mongoid_document }
     end
-    context 'Invalid factory' do
-      subject { build(:invalid_category) }
+    context 'Valid factory' do
+      subject { build(:invalid_user) }
       specify { is_expected.not_to be_valid }
     end
   end
 
   describe 'Associations' do
+    # it { is_expected.to have_one(:cart).of_type(Cart) }
   end
 
   describe 'Validations' do
-    it { should validate_presence_of(:name) }
   end
 
   describe 'Callbacks' do
