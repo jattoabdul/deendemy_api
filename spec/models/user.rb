@@ -14,7 +14,13 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Associations' do
-    # it { is_expected.to have_one(:cart).of_type(Cart) }
+    it { is_expected.to have_many(:conversations).of_type(Conversation) }
+    it { is_expected.to have_many(:notifications).of_type(Notification) }
+    it { is_expected.to have_many(:medias).of_type(Media) }
+    it { is_expected.to have_many(:courses).of_type(Course) }
+    it { is_expected.to have_many(:enrollments).of_type(Enrollment) }
+    it { is_expected.to have_one(:cart).of_type(Cart) }
+    it { is_expected.to have_one(:wishlist).of_type(Wishlist) }
   end
 
   describe 'Validations' do

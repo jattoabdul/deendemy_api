@@ -11,6 +11,9 @@ FactoryBot.define do
   end
 
   factory :invalid_message, parent: :message do
-    user_id { nil }
+    sender_id { nil }
+    receiver_id { nil }
+    conversation_id { nil }
+    body { nil }
   end
 end

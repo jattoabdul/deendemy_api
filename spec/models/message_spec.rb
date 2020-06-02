@@ -1,5 +1,38 @@
 require 'rails_helper'
 
 RSpec.describe Message, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Factories' do
+    context 'Valid factory' do
+      subject { build(:message) }
+      specify { should be_valid }
+      specify { is_expected.to be_mongoid_document }
+    end
+    context 'Invalid factory' do
+      subject { build(:invalid_message) }
+      specify { is_expected.not_to be_valid }
+    end
+  end
+
+  describe 'Associations' do
+    it { is_expected.to belong_to(:conversation).of_type(Conversation) }
+    it { is_expected.to belong_to(:sender).of_type(User) }
+    it { is_expected.to belong_to(:receiver).of_type(User) }
+    it { is_expected.to have_many(:medias).of_type(Media) }
+  end
+
+  describe 'Validations' do
+    it { should validate_presence_of(:body) }
+    it { should validate_presence_of(:conversation_id) }
+    it { should validate_presence_of(:sender_id) }
+    it { should validate_presence_of(:receiver_id) }
+  end
+
+  describe 'Callbacks' do
+  end
+
+  describe 'ClassMethods' do
+  end
+
+  describe 'InstanceMethods' do
+  end
 end

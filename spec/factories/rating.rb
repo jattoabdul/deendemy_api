@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :rating do
-    # user
-    # course
     rating { rand(0..5) }
     review { nil }
     status { 'published' }

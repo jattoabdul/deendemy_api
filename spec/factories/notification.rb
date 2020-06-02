@@ -1,6 +1,9 @@
 FactoryBot.define do
   factory :notification do
     action { 'message_created' }
+    read_at { Time.current }
+    is_deleted { false }
+    data { {} }
 
     association :recipient, factory: [:user]
     association :actor, factory: [:user]
@@ -9,6 +12,5 @@ FactoryBot.define do
 
   factory :invalid_notification, parent: :notification do
     action { nil }
-    notifiable { nil }
   end
 end

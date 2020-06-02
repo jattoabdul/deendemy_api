@@ -20,6 +20,13 @@ FactoryBot.define do
       end
     end
 
+    trait :without_wishlist do
+      after(:create) do |user|
+        user.wishlist.destroy
+        user.save
+      end
+    end
+
     trait :teacher do
       roles { %w(learner teacher) }
     end

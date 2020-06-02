@@ -81,7 +81,6 @@ class User
   has_one :cart
   has_one :wishlist
   has_many :enrollments, foreign_key: :learner_id
-  # belongs_to :learner, class_name: 'User'  # to be added on enrollment
 
   # Hooks/Callbacks
   before_validation do

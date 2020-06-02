@@ -1,6 +1,6 @@
 class Api::V1::CartsController < Api::V1::ApplicationController
   before_action :set_cart, only: [:show]
-  before_action :set_user, only: [:index, :show, :add_to_cart, :remove_from_cart]
+  before_action :set_user, only: %i(index show add_to_cart remove_from_cart)
 
   # GET /accounts/:account_id/carts
   def index
@@ -57,7 +57,7 @@ class Api::V1::CartsController < Api::V1::ApplicationController
     end
 
     def cart_owner_or_admin?
-       (@cart.user_id == current_api_v1_user.id) || (current_api_v1_user.roles.include?('admin') )
+       (@cart.user_id == current_api_v1_user.id) || current_api_v1_user.roles.include?('admin') 
     end
 
     def cart_params
