@@ -1,11 +1,11 @@
 class Api::V1::MediasController < Api::V1::ApplicationController
   include ErrorSerializer
-  before_action :set_media, only: [:show, :update, :destroy]
+  before_action :set_media, only: %i(show update destroy)
 
   # GET /medias
   def index
     # TODO: check that user is admin
-    @medias = Media.includes([:user, :message]).all
+    @medias = Media.includes(%i(user message)).all
 
     render json: @medias
   end
@@ -37,7 +37,7 @@ class Api::V1::MediasController < Api::V1::ApplicationController
 
   # PATCH/PUT /medias/1
   def update
-    # TODO: allow only update of owned media and  do not allow update of item
+    # TODO: allow only update of owned media and do not allow update of item
     if @media.update(media_params)
       render json: @media
     else

@@ -1,5 +1,5 @@
 class Api::V1::MessagesController < Api::V1::ApplicationController
-  before_action :set_conversation, only: [:index, :create]
+  before_action :set_conversation, only: %i(index create)
 
   # GET conversations/:conversation_id/messages
   def index
@@ -20,7 +20,7 @@ class Api::V1::MessagesController < Api::V1::ApplicationController
     render json: @message, status: :created
   end
 
-  # POST conversations/messages/
+  # POST conversations/messages
   def bulk_create
     bad_request_error('No message recipients provided') && return unless message_params[:recipient_ids].present?
 
