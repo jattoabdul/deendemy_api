@@ -1,10 +1,10 @@
 class Api::V1::ChaptersController < Api::V1::ApplicationController
-  before_action :set_chapter, only: [:show, :update, :destroy]
-  before_action :set_course, only: [:index, :create, :show, :update, :update_positions, :destroy]
+  before_action :set_chapter, only: %i(show update destroy)
+  before_action :set_course, only: %i(index create show update update_positions destroy)
 
   # GET courses/:course_id/chapters
   def index
-    @chapters = Chapter.includes([:course, :lessons]).where(course_id: @course.id).order_by(position: :asc)
+    @chapters = Chapter.includes(%i(course lessons)).where(course_id: @course.id).order_by(position: :asc)
 
     render json: @chapters
   end
@@ -50,11 +50,11 @@ class Api::V1::ChaptersController < Api::V1::ApplicationController
 
     positions_hash = Hash[params[:positions].map.with_index.to_a]
 
-    @chapters = Chapter.includes([:course, :lessons,:notifications, :events]).where(course_id: @course.id).find(params[:positions])
+    @chapters = Chapter.includes(%i(course lessons notifications events)).where(course_id: @course.id).find(params[:positions])
     @chapters.each do |chapter|
       chapter.update_attributes(position: positions_hash[chapter.id.to_s].to_i)
     end
-    @chapters = Chapter.includes([:course, :lessons,:notifications, :events]).where(course_id: @course.id).order_by(position: :asc)
+    @chapters = Chapter.includes(%i(course lessons notifications events)).where(course_id: @course.id).order_by(position: :asc)
 
     render json: @chapters
   end
@@ -76,7 +76,7 @@ class Api::V1::ChaptersController < Api::V1::ApplicationController
     end
 
     def course_owner_or_admin?
-      (@course.tutor_id == current_api_v1_user.id) || (current_api_v1_user.roles.include?('admin') )
+      (@course.tutor_id == current_api_v1_user.id) || current_api_v1_user.roles.include?('admin') 
     end
 
     # Only allow a trusted parameter "white list" through.

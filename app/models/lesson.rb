@@ -9,12 +9,12 @@ class Lesson
 
   # Fields
   field :reference, type: String
-  enumerize :type, in: [:lecture, :quiz, :survey], default: :lecture, predicates:  true
+  enumerize :type, in: %i(lecture quiz survey), default: :lecture, predicates:  true
   field :title, type: String
   field :description, type: String
   field :content_id, type: BSON::ObjectId
   field :additional_resource_id, type: BSON::ObjectId
-  enumerize :status, in: [:draft, :published], default: :published, predicates: true
+  enumerize :status, in: %i(draft published), default: :published, predicates: true
   field :prerequisite, type: Mongoid::Boolean
   field :downloadable, type: Mongoid::Boolean
   field :can_discuss, type: Mongoid::Boolean

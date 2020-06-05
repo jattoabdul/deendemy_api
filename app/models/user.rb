@@ -81,14 +81,13 @@ class User
   has_one :cart
   has_one :wishlist
   has_many :enrollments, foreign_key: :learner_id
-  # belongs_to :learner, class_name: 'User'  # to be added on enrollment
 
   # Hooks/Callbacks
   before_validation do
     self.uid = email if uid.blank?
   end
   before_save do
-    self.roles = roles.map { |role| role.downcase } if roles.any?
+    self.roles = roles.map(&:downcase) if roles.any?
     self.provider = 'email' if provider.blank?
   end
   after_create do
@@ -116,7 +115,7 @@ class User
   index( { invitation_by_id: 1 }, { background: true} )
 
   # Added as a hack to avoid the error on create
-  def saved_change_to_attribute?(attr_name, **options)
+  def saved_change_to_attribute?(_attr_name, **_options)
     true
   end
 

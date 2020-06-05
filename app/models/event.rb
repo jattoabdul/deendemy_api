@@ -8,11 +8,7 @@ class Event
   belongs_to :eventable, polymorphic: true, required: false
   validates :name, presence: true
 
-  CABLE_EVENTS = [
-    # 'model.actioned',
-    'user.created',
-    'message.created'
-  ].freeze
+  CABLE_EVENTS = %w(user.created message.created).freeze
 
   after_create do
     EmitEventJob.perform_async(id.to_s, 'Deendemy::EventActionCableDispatcher') if CABLE_EVENTS.include?(name)

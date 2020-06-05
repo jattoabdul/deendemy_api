@@ -89,7 +89,16 @@ Rails.application.routes.draw do
               end
             end
           end
-          resources :lessons, only: [:create, :update, :show, :destroy]
+          resources :chapters, only: [] do
+            collection do
+              get '/' => :all_chapters
+            end
+          end
+          resources :lessons, only: [:create, :update, :show, :destroy] do
+            collection do
+              get '/' => :all_lessons
+            end
+          end
           resources :enrollments, only: [:index, :create, :show, :destroy] do
             member do
               match '/status' => :toggle_enrollment_status, via: [:put, :patch]

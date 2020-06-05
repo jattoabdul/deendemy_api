@@ -10,6 +10,7 @@ require 'rspec/rails'
 require 'devise'
 require 'mongoid-rspec'
 require 'shoulda/matchers'
+require 'rspec-sidekiq'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -29,8 +30,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-
-  config.include Mongoid::Matchers, type: :model
 
   config.include Rails.application.routes.url_helpers
 
@@ -59,6 +58,8 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  config.include Mongoid::Matchers, type: :model
 
   config.before(:suite) do
     # prep factory_run tracking

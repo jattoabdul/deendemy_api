@@ -43,7 +43,7 @@ class LessonDiscussion
   private
 
   def discussion_time
-    created_at.strftime("%d/%m/%y at %l:%M %p")
+    created_at.strftime('%d/%m/%y at %l:%M %p')
   end
 
   def recipients

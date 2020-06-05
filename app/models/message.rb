@@ -8,8 +8,7 @@ class Message
 
   # Fields
   field :body, type: String
-  field :priority, type: String
-  enumerize :priority, in: [:normal, :high, :critical], default: :normal, predicates: { prefix: true }
+  enumerize :priority, in: %i(normal high critical), default: :normal, predicates: { prefix: true }
   field :read,  type: Mongoid::Boolean, default: false
   field :is_deleted, type: Mongoid::Boolean, default: false
   field :conversation_id, type: BSON::ObjectId
@@ -38,14 +37,14 @@ class Message
 
   def formated_message_time
     {
-      date_time_pretty_short: created_at.strftime("%d/%m/%y at %l:%M %p")
+      date_time_pretty_short: created_at.strftime('%d/%m/%y at %l:%M %p')
     }
   end
 
   private
 
   def message_time
-    created_at.strftime("%d/%m/%y at %l:%M %p")
+    created_at.strftime('%d/%m/%y at %l:%M %p')
   end
 
   def recipients

@@ -30,6 +30,8 @@ class Payment
   belongs_to :user
 
   # Validations
+  validates_presence_of :reference, :user_id
+  # TODO: validate numericality - greater than or equal-to zero for number fields
 
   # Hooks/Callbacks
   after_create do

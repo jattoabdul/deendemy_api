@@ -69,6 +69,6 @@ class Course
   end
 
   def price_cannot_be_zero_for_paid_course
-    errors.add(:price, 'must have a value greater than zero for a paid course') if price_pence <= 0 && self.type == 'paid'
+    errors.add(:price, 'must have a value greater than zero for a paid course') if price_pence.to_i <= 0 && type == 'paid'
   end
 end

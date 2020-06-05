@@ -18,6 +18,7 @@ class Progress
   belongs_to :enrollment, class_name: 'Enrollment', foreign_key: 'enrollment_id', autosave: true
 
   # Validations
+  validates_presence_of :course_id, :lesson_id, :enrollment_id, :status
 
   # Hooks/Callbacks
   after_save do

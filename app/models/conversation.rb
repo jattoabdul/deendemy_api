@@ -28,6 +28,6 @@ class Conversation
   end
 
   def recipient(current_user)
-    self.sender_id == current_user.id ? self.receiver : self.sender
+    sender_id == current_user.id ? receiver : sender
   end
 end

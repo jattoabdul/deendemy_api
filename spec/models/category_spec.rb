@@ -6,7 +6,7 @@ RSpec.describe Category, type: :model do
       subject { build(:category) }
       specify { should be_valid }
     end
-    context 'Valid factory' do
+    context 'Invalid factory' do
       subject { build(:invalid_category) }
       specify { is_expected.not_to be_valid }
     end
