@@ -54,7 +54,7 @@ gem 'paystackapi'
 # gem 'twilio-ruby', '~> 5.6.4'
 # gem 'aws-sdk-rails', '~> 3.0'
 gem 'aws-sdk-s3', '~> 1.0', require: false
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'carrierwave_direct'
 # gem 'carrierwave_backgrounder', '~> '
