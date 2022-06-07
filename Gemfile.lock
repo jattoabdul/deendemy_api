@@ -251,7 +251,7 @@ GEM
     ipaddr (1.2.2)
     ipaddress (0.8.3)
     jaro_winkler (1.5.4)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     json (2.3.0)
     jsonapi-renderer (0.2.2)
     jwt (2.2.1)
